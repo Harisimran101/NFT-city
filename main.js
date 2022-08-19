@@ -24,7 +24,7 @@ let selectedObjects = [];
             scene.background = new THREE.Color('#4E005B')
          
              // Camera
- 			const camera = new THREE.PerspectiveCamera( 60, window.innerWidth / window.innerHeight, 0.001, 50000 );
+ 			const camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 0.001, 50000 );
             camera.position.set(0,150,240)
 
             // Renderer
@@ -34,7 +34,7 @@ let selectedObjects = [];
             });
 			renderer.setSize( window.innerWidth, window.innerHeight );
 			document.body.appendChild( renderer.domElement );
-            renderer.setPixelRatio( window.devicePixelRatio / 1.5);
+            renderer.setPixelRatio( window.devicePixelRatio / 1.4);
 
             // Camera Controls
             // const controls = new OrbitControls( camera, renderer.domElement );
@@ -73,16 +73,20 @@ const xAxis = new THREE.Vector3(1, 0, 0);
 const basePlane = new THREE.Plane(yAxis, 0);
 
 const cameraControls = new CameraControls( camera, renderer.domElement );
-cameraControls.dampingFactor = 0.1;
-cameraControls.draggingDampingFactor = 0.45;
 cameraControls.verticalDragToForward = true;
 cameraControls.dollyToCursor = true;
+
 // cameraControls.maxPolarAngle = (Math.PI * 0.5) - 0.25;
 // cameraControls.minPolarAngle = (Math.PI * 0.5) - 0.3;
 cameraControls.minDistance = 200;
 cameraControls.maxDistance = 1000;
 cameraControls.maxZoom = 100;
 cameraControls.minZoom = 100;
+cameraControls.dollySpeed = 0.000000001
+cameraControls.truckSpeed = 0.000000001
+
+console.log(cameraControls)
+
 document.addEventListener('wheel', e => {
     if (e.deltaY < 0) {
         cameraState.cameraMethod = Math.min(cameraState.cameraMethod + 1, cameraState.cameraAngle.length - 1);
@@ -98,21 +102,20 @@ document.addEventListener('mousedown', e => {
 
     
 	// calculate objects intersecting the picking ray
-	const intersects = raycaster.intersectObjects( scene.children );
-if(cameraState.cameraMethod < 6){
-    for ( let i = 0; i < intersects.length; i ++ ) {
+// 	const intersects = raycaster.intersectObjects( scene.children );
+// if(cameraState.cameraMethod < 6){
+//     for ( let i = 0; i < intersects.length; i ++ ) {
         
-        if(intersects[i].object.name === 't6' || intersects[i].object.name === 's3' || intersects[i].object.name === 't9' || intersects[i].object.name === 'trophy' || intersects[i].object.name === 's1003' || intersects[i].object.name === 's1' || intersects[i].object.name === 'tt1' || intersects[i].object.name === 't9' || intersects[i].object.name === 't8' || (intersects[i].object.name.indexOf('Baked') >= 0)){
-            // intersects[i].object.material.color.set(0xff0000);
+//         if(intersects[i].object.name === 't6' || intersects[i].object.name === 's3' || intersects[i].object.name === 't9' || intersects[i].object.name === 'trophy' || intersects[i].object.name === 's1003' || intersects[i].object.name === 's1' || intersects[i].object.name === 'tt1' || intersects[i].object.name === 't9' || intersects[i].object.name === 't8' || (intersects[i].object.name.indexOf('Baked') >= 0)){
+//             // intersects[i].object.material.color.set(0xff0000);
 
-            cameraState.cameraMethod = 8;
-            cameraState.isTargetMoving = true;
-            cameraState.targetPos = intersects[i].point.clone().setY(0);
-            console.log(intersects[i].point)
-        }   
-    }
+//             cameraState.cameraMethod = 8;
+//             cameraState.isTargetMoving = true;
+//             cameraState.targetPos = intersects[i].point.clone().setY(0);
+//         }   
+//     }
 
-    }
+//     }
 })
 const mouseMoveHandler = e => {
     if (!cameraState.isClicked) {
@@ -129,7 +132,7 @@ const cameraMover = (delta) => {
     camPos = cameraControls.getPosition();
     targetPos = cameraControls.getTarget();
     arm = targetPos.clone().sub(camPos);
-    const norm = arm.clone().setY(0).normalize().multiplyScalar(delta.y * Math.log(camPos.y) / 10);
+    const norm = arm.clone().setY(0).normalize().multiplyScalar(delta.y * Math.log(camPos.y) / 26);
     arm.applyAxisAngle(yAxis, delta.x / 1000);
     targetPos = camPos.clone().add(arm);
     camPos.add(norm);
@@ -156,7 +159,7 @@ const updateCamera = () => {
     const direction = xAxis.clone().cross(projectedAngle).normalize().y;
     const angle = (Math.PI * 2 + xAxis.angleTo(projectedAngle) * direction) % (Math.PI * 2);
     const normalizedAngle = cameraAngle.clone().applyAxisAngle(yAxis, -angle);
-    const newNormalizedAngle = normalizedAngle.add(cameraState.cameraAngle[cameraState.cameraMethod].clone().sub(normalizedAngle).multiplyScalar(0.05));
+    const newNormalizedAngle = normalizedAngle.add(cameraState.cameraAngle[cameraState.cameraMethod].clone().sub(normalizedAngle).multiplyScalar(0.07));
     const newCameraAngle = newNormalizedAngle.applyAxisAngle(yAxis, angle);
     const newCameraPos = targetPos.clone().add(newCameraAngle);
 
@@ -495,7 +498,7 @@ model.position.z = modelpos.z
                 }
     
                   if(child.isMesh && child.material.map){
-                     child.material.map.anisotropy = 16;
+                     child.material.map.anisotropy = 1;
                   }
     
               })
@@ -561,7 +564,7 @@ function checkIntersection(){
 
     } else {
 
-        document.body.style.cursor = 'default'
+        document.body.style.cursor = 'grab'
         selectedObject = null
         // outlinePass.selectedObjects = [];
 
@@ -569,21 +572,43 @@ function checkIntersection(){
 
 }
 
-document.querySelector('canvas').addEventListener('dblclick', () =>{
 
-    console.log(cameraControls)
+cameraControls.addEventListener('rest', function(){
+    document.querySelector('canvas').addEventListener('click', () =>{
 
-    if(selectedObject){
-        anime({
-            targets: '#original-position-btn',
-            bottom: '6%',
-            easing: 'easeInOutCubic'
+        if(selectedObject){
+        
+            cameraState.cameraMethod = 8;
+            cameraState.isTargetMoving = true;
+            cameraState.targetPos = new THREE.Vector3(selectedObject.position.x,0,selectedObject.position.z - 20)
+            //cameraControls.setTarget(selectedObject.position.x,selectedObject.position.y,selectedObject.position.z,true );
+         //   console.log(cameraControls)
+        
+            console.log(selectedObject.position)
+           console.log(cameraControls.getTarget())
+        }
+        
+          
+             
+            if(selectedObject){
+                anime({
+                    targets: '#original-position-btn',
+                    bottom: '6%',
+                    easing: 'easeInOutCubic'
+                })
+            
+            }
+            
+        
         })
-    
-    }
-    
+
 
 })
+
+     
+
+
+
 
 
             const clock = new THREE.Clock();
@@ -611,7 +636,7 @@ document.querySelector('canvas').addEventListener('dblclick', () =>{
       
             //  console.log(renderer.info)
             
-
+        //    console.log(cameraState)
                  composer.render();
 
 			};
