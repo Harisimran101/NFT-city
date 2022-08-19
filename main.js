@@ -566,6 +566,7 @@ function checkIntersection(){
 
         document.body.style.cursor = 'grab'
         selectedObject = null
+        outlinePass.selectedObjects = []
         // outlinePass.selectedObjects = [];
 
     }
