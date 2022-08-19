@@ -511,32 +511,32 @@ model.position.z = modelpos.z
 
 }
 
-document.querySelector('#original-position-btn').addEventListener('click', () =>{
-    anime({
-        targets: camera.position,
-        x: [camera.position.x,0],
-        y: [camera.position.y,70],
-        z: [camera.position.z,130],
-        duration: 1200,
-        easing: 'easeInOutSine'
-    })
+// document.querySelector('#original-position-btn').addEventListener('click', () =>{
+//     anime({
+//         targets: camera.position,
+//         x: [camera.position.x,0],
+//         y: [camera.position.y,70],
+//         z: [camera.position.z,130],
+//         duration: 1200,
+//         easing: 'easeInOutSine'
+//     })
 
-    anime({
-        targets: controls.target,
-        x: [controls.target.x,0],
-        y: [controls.target.y,0],
-        z: [controls.target.z,0],
-        duration: 1200,
-        easing: 'easeInOutSine'
-    })
+//     anime({
+//         targets: controls.target,
+//         x: [controls.target.x,0],
+//         y: [controls.target.y,0],
+//         z: [controls.target.z,0],
+//         duration: 1200,
+//         easing: 'easeInOutSine'
+//     })
 
-    anime({
-        targets: '#original-position-btn',
-        bottom: '-20%',
-        easing: 'easeInOutCubic'
-    })
+//     anime({
+//         targets: '#original-position-btn',
+//         bottom: '-20%',
+//         easing: 'easeInOutCubic'
+//     })
 
-})
+// })
 
 function addSelectedObject( object ) {
 
