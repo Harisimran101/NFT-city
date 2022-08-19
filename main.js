@@ -34,7 +34,7 @@ let selectedObjects = [];
             });
 			renderer.setSize( window.innerWidth, window.innerHeight );
 			document.body.appendChild( renderer.domElement );
-            renderer.setPixelRatio( window.devicePixelRatio / 1.4);
+            renderer.setPixelRatio( window.devicePixelRatio / 1.5);
 
             // Camera Controls
             // const controls = new OrbitControls( camera, renderer.domElement );
@@ -380,7 +380,7 @@ window.addEventListener('resize', function()
 	let width = window.innerWidth;
 	let height = window.innerHeight;
 	renderer.setSize( width, height );
-    renderer.setPixelRatio( window.devicePixelRatio );
+    renderer.setPixelRatio( window.devicePixelRatio /1.5 );
 
 	camera.aspect = width / height;
 	camera.updateProjectionMatrix();
