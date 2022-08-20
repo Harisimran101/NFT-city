@@ -11,7 +11,32 @@ import { GUI } from 'https://cdn.skypack.dev/three@0.136/examples/jsm/libs/lil-g
 import { LoadingManager } from 'https://cdn.skypack.dev/three@0.136/src/loaders/LoadingManager.js';
 import { OutlinePass } from 'https://cdn.skypack.dev/three@0.136/examples/jsm/postprocessing/OutlinePass.js';
 
-// HTML animation
+// Audio Play
+const playingaudio = document.querySelector('.myaudio')
+playingaudio.loop = true
+const audiobtn = document.querySelector('.audio-icon')
+const audioicon = document.querySelector('.audio-icon i')
+
+let clickcount = 1;
+
+audiobtn.addEventListener('click', () =>{
+
+    if(clickcount == 1){
+        playingaudio.volume = 0;
+     audioicon.classList = 'bi bi-volume-mute';
+     clickcount = 0;
+    }
+
+    else {
+        playingaudio.volume = 1;
+        audioicon.classList = 'bi bi-volume-up-fill'
+        clickcount = 1;
+    }
+     
+})
+
+
+
 
 CameraControls.install( { THREE: THREE } );
 console.log(CameraControls)
@@ -82,8 +107,6 @@ cameraControls.minDistance = 200;
 cameraControls.maxDistance = 1000;
 cameraControls.maxZoom = 100;
 cameraControls.minZoom = 100;
-cameraControls.dollySpeed = 0.000000001
-cameraControls.truckSpeed = 0.000000001
 
 console.log(cameraControls)
 
@@ -101,21 +124,20 @@ document.addEventListener('mousedown', e => {
     cameraState.virtualMousePos.setX(e.pageX);   cameraState.virtualMousePos.setY(e.pageY);
 
     
-	// calculate objects intersecting the picking ray
-// 	const intersects = raycaster.intersectObjects( scene.children );
-// if(cameraState.cameraMethod < 6){
-//     for ( let i = 0; i < intersects.length; i ++ ) {
+	//calculate objects intersecting the picking ray
+	const intersects = raycaster.intersectObjects( allobjs);
+if(cameraState.cameraMethod < 9){
+    for ( let i = 0; i < intersects.length; i ++ ) {
         
-//         if(intersects[i].object.name === 't6' || intersects[i].object.name === 's3' || intersects[i].object.name === 't9' || intersects[i].object.name === 'trophy' || intersects[i].object.name === 's1003' || intersects[i].object.name === 's1' || intersects[i].object.name === 'tt1' || intersects[i].object.name === 't9' || intersects[i].object.name === 't8' || (intersects[i].object.name.indexOf('Baked') >= 0)){
-//             // intersects[i].object.material.color.set(0xff0000);
+            // intersects[i].object.material.color.set(0xff0000);
 
-//             cameraState.cameraMethod = 8;
-//             cameraState.isTargetMoving = true;
-//             cameraState.targetPos = intersects[i].point.clone().setY(0);
-//         }   
-//     }
+            cameraState.cameraMethod = 8;
+            cameraState.isTargetMoving = true;
+            cameraState.targetPos = intersects[i].point.clone().setY(0);
+        
+    }
 
-//     }
+    }
 })
 const mouseMoveHandler = e => {
     if (!cameraState.isClicked) {
@@ -457,6 +479,7 @@ function loadmodel(modelname,modelpos){
            
 model.position.x = modelpos.x; 
 model.position.z = modelpos.z 
+playingaudio.play()
 
               let allanimations = []
     
@@ -561,6 +584,7 @@ function checkIntersection(){
        selectedObject = intersects[ 0 ].object;
         addSelectedObject( selectedObject );
         outlinePass.selectedObjects = selectedObjects;
+    
 
     } else {
 
@@ -574,37 +598,37 @@ function checkIntersection(){
 }
 
 
-cameraControls.addEventListener('rest', function(){
-    document.querySelector('canvas').addEventListener('click', () =>{
 
-        if(selectedObject){
+//     document.querySelector('canvas').addEventListener('mousedown', () =>{
+//   console.log(selectedObject)
+
+    
         
-            cameraState.cameraMethod = 8;
-            cameraState.isTargetMoving = true;
-            cameraState.targetPos = new THREE.Vector3(selectedObject.position.x,0,selectedObject.position.z - 20)
-            //cameraControls.setTarget(selectedObject.position.x,selectedObject.position.y,selectedObject.position.z,true );
-         //   console.log(cameraControls)
+//             cameraState.cameraMethod = 8;
+//             cameraState.isTargetMoving = true;
+//             cameraState.targetPos = new THREE.Vector3(selectedObject.position.x,0.8,selectedObject.position.z -10)
+//         //  cameraControls.setTarget(selectedObject.position.x,selectedObject.position.y,selectedObject.position.z,true );
+//          //   console.log(cameraControls)
         
-            console.log(selectedObject.position)
-           console.log(cameraControls.getTarget())
-        }
+//             console.log(selectedObject.position)
+//            console.log(cameraControls.getTarget())
+
         
           
              
-            if(selectedObject){
-                anime({
-                    targets: '#original-position-btn',
-                    bottom: '6%',
-                    easing: 'easeInOutCubic'
-                })
+//             // if(selectedObject){
+//             //     anime({
+//             //         targets: '#original-position-btn',
+//             //         bottom: '6%',
+//             //         easing: 'easeInOutCubic'
+//             //     })
             
-            }
+//             // }
             
         
-        })
+//         })
 
 
-})
 
      
 
