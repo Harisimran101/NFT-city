@@ -12,7 +12,7 @@ import { LoadingManager } from 'https://cdn.skypack.dev/three@0.136/src/loaders/
 import { OutlinePass } from 'https://cdn.skypack.dev/three@0.136/examples/jsm/postprocessing/OutlinePass.js';
 
 // Audio Play
-const playingaudio = document.querySelector('.myaudio')
+const playingaudio = document.querySelector('.menuaudio')
 playingaudio.loop = true
 const audiobtn = document.querySelector('.audio-icon')
 const audioicon = document.querySelector('.audio-icon i')
