@@ -16,6 +16,8 @@ const playingaudio = document.querySelector('.myaudio')
 playingaudio.loop = true
 const audiobtn = document.querySelector('.audio-icon')
 const audioicon = document.querySelector('.audio-icon i')
+const menuaudio = document.querySelector('.menuaudio');
+menuaudio.loop = true
 
 let clickcount = 1;
 
@@ -35,8 +37,44 @@ audiobtn.addEventListener('click', () =>{
      
 })
 
+// Menu Logic 
+
+const menubtn = document.querySelector('.menu-btn')
+const menuclosebtn = document.querySelector('.menu-close-btn')
+
+menubtn.addEventListener('click', () =>{
+    playingaudio.pause()
+ menuaudio.play()
+
+   document.querySelector('.menu').classList.toggle('open-menu')
+  
+  anime({
+    targets: '.menu-items h1',
+    translateY: ['45px','0px'],
+    filter: ['blur(20px)','blur(0px)'],
+    opacity: [0,1],
+    delay: function(el,i){
+      return (i * 100) + 150
+    },
+    easing: 'easeInOutCubic'
+  })
+  
+})
+
+menuclosebtn.addEventListener('click', () =>{
+   document.querySelector('.menu').classList.toggle('open-menu')
+
+} )
 
 
+// Modal logic
+
+const newmodal = document.querySelector('.new-modal')
+const modalclosebtn = document.querySelector('.modal-close-btn')
+
+modalclosebtn.addEventListener('click', () =>{
+     newmodal.classList.remove('active-modal')
+})
 
 CameraControls.install( { THREE: THREE } );
 console.log(CameraControls)
@@ -49,7 +87,7 @@ let selectedObjects = [];
             scene.background = new THREE.Color('#4E005B')
          
              // Camera
- 			const camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 0.001, 50000 );
+ 			const camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 0.001, 15000 );
             camera.position.set(0,150,240)
 
             // Renderer
@@ -61,17 +99,10 @@ let selectedObjects = [];
 			document.body.appendChild( renderer.domElement );
             renderer.setPixelRatio( window.devicePixelRatio / 1.4);
 
-            // Camera Controls
-            // const controls = new OrbitControls( camera, renderer.domElement );
-            // controls.enableDamping = true;
-            // controls.dampingFactor = 0.05;
-            // controls.minDistance = 7;
-            // controls.maxDistance = 330;
-            // controls.maxPolarAngle = Math.PI / 2.1
-            // controls.enablePan   = false; 
 
 
-// Controls
+
+// Camera Controls
 
 const cameraState = {
     mousePos: new THREE.Vector2(0, 0),
@@ -103,7 +134,7 @@ cameraControls.dollyToCursor = true;
 
 // cameraControls.maxPolarAngle = (Math.PI * 0.5) - 0.25;
 // cameraControls.minPolarAngle = (Math.PI * 0.5) - 0.3;
-cameraControls.minDistance = 200;
+cameraControls.minDistance = 400;
 cameraControls.maxDistance = 1000;
 cameraControls.maxZoom = 100;
 cameraControls.minZoom = 100;
@@ -117,7 +148,7 @@ document.addEventListener('wheel', e => {
         cameraState.cameraMethod = Math.max(cameraState.cameraMethod - 1, 0);
     }
 })
-document.addEventListener('mousedown', e => {
+document.querySelector('canvas').addEventListener('mousedown', e => {
     cameraState.isClicked = true;
     cameraState.mousePos.setX(e.pageX);   cameraState.mousePos.setY(e.pageY);
     cameraState.targetPos = cameraControls.getTarget();
@@ -126,18 +157,21 @@ document.addEventListener('mousedown', e => {
     
 	//calculate objects intersecting the picking ray
 	const intersects = raycaster.intersectObjects( allobjs);
-if(cameraState.cameraMethod < 9){
+
     for ( let i = 0; i < intersects.length; i ++ ) {
         
-            // intersects[i].object.material.color.set(0xff0000);
 
             cameraState.cameraMethod = 8;
             cameraState.isTargetMoving = true;
-            cameraState.targetPos = intersects[i].point.clone().setY(0);
+            cameraState.targetPos = intersects[0].point.clone().setY(0);
         
     }
 
+    if(intersects[0].object){
+         newmodal.classList.add('active-modal')
     }
+
+    
 })
 const mouseMoveHandler = e => {
     if (!cameraState.isClicked) {
@@ -146,7 +180,7 @@ const mouseMoveHandler = e => {
     }
     cameraState.mousePos.setX(e.pageX);   cameraState.mousePos.setY(e.pageY);
 }
-document.addEventListener('mousemove', mouseMoveHandler);
+document.querySelector('canvas').addEventListener('mousemove', mouseMoveHandler);
 
 const cameraMover = (delta) => {
     let camPos, targetPos;
@@ -422,10 +456,6 @@ window.addEventListener('resize', function()
     }
 
 
-    const points = [
-
-    ]
-   
  // Model loading   
 
  let model;
@@ -579,7 +609,7 @@ function checkIntersection(){
     const intersects = raycaster.intersectObjects( allobjs );
 
     if ( intersects.length > 0 ) {
-        document.body.style.cursor = 'pointer'
+        document.querySelector('canvas').style.cursor = 'pointer'
 
        selectedObject = intersects[ 0 ].object;
         addSelectedObject( selectedObject );
@@ -588,7 +618,7 @@ function checkIntersection(){
 
     } else {
 
-        document.body.style.cursor = 'grab'
+        document.querySelector('canvas').style.cursor = 'grab'
         selectedObject = null
         outlinePass.selectedObjects = []
         // outlinePass.selectedObjects = [];
@@ -596,8 +626,6 @@ function checkIntersection(){
     }
 
 }
-
-
 
 //     document.querySelector('canvas').addEventListener('mousedown', () =>{
 //   console.log(selectedObject)
@@ -629,13 +657,6 @@ function checkIntersection(){
 //         })
 
 
-
-     
-
-
-
-
-
             const clock = new THREE.Clock();
 
             // Animate
@@ -644,24 +665,10 @@ function checkIntersection(){
 				requestAnimationFrame( animate );
                 const delta = clock.getDelta();
 
-                // for(const point of points){
-                //    // console.log(point)
-                //      const screenposition = point.position.clone()
-                //      screenposition.project(camera)
-                //      const translateX = screenposition.x * window.innerWidth * 0.5;
-                //      const translateY = -screenposition.y * window.innerHeight * 0.5;
-                //      point.element.style.transform = `translateX(${translateX}px) translateY(${translateY}px)` 
-                // }
-
-			//	controls.update( delta );
-
                 if ( mixer ) mixer.update( clock.getDelta() * 8);
                 cameraControls.update(0.01)
                 updateCamera();
       
-            //  console.log(renderer.info)
-            
-        //    console.log(cameraState)
                  composer.render();
 
 			};

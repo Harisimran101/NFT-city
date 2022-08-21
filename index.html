@@ -14,6 +14,22 @@
 <body>
 
 
+      
+      <!-- Modal -->
+         <div class="new-modal">
+          <i class="modal-close-btn bi bi-x"></i>
+
+            <img class="map-image" src="images/map-image.png">
+            <img class="nft-image" src="images/bored.jpg">
+             <div class="modal-user-info">
+              <img class="user-image" src="images/bored.jpg">
+              <p>Map owned by you: 0</p>
+              <p>Username: Peter</p>
+             </div>
+
+         </div>
+
+
    <div class="audio-icon">
     <i class="bi bi-volume-up-fill"></i>
    </div>
@@ -21,6 +37,10 @@
     <audio class="myaudio">
        <source src="Audio/background-music.mp3" type="audio/mpeg"> 
     </audio>
+
+    <audio class="menuaudio">
+      <source src="Audio/menu-audio.mp3" type="audio/mpeg"> 
+   </audio>
 
     <!-- Preloader -->
     <div class="preloader">
@@ -32,20 +52,27 @@
 
 
  
-    <div class="my-navbar">
-        <div class="navbar-row-1">
-            <img class="logo" src="images/Logo.PNG">
-        </div>
-
-        <div class="navbar-row-2">
-            <a href="#">Vision</a>
-            <a href="#">Join us</a>
-            <a href="#">Events</a>
-            <a href="#">Sign up/Wallet</a>
-            <a href="#">Profile</a>
-        </div>
-
+    <div class="mynavbar">
+      <img class="navlogo" src="https://assets.codepen.io/7014830/Logo.png">
+  
+    <i class="menu-btn bi bi-list"></i>
+  </div>
+  
+  <div class="menu">
+    <i class="menu-close-btn bi bi-x"></i>
+    
+    <img class="logo" src="https://assets.codepen.io/7014830/Logo.png">
+    
+    <div class="menu-items">
+      <h1>Vision</h1>
+      <h1>Join us</h1>
+      <h1>Events</h1>
+      <h1>Sign up/Wallet</h1>
+      <h1>Profile</h1>
+  
     </div>
+    
+  </div>
 
     <script type="module" src="main.js"></script>
     <script src="camera-controls.js"></script>
