@@ -14,10 +14,10 @@ import { OutlinePass } from 'https://cdn.skypack.dev/three@0.136/examples/jsm/po
 // Audio Play
 const playingaudio = document.querySelector('.menuaudio')
 playingaudio.loop = true
+playingaudio.volume = 0.7
 const audiobtn = document.querySelector('.audio-icon')
 const audioicon = document.querySelector('.audio-icon i')
-const menuaudio = document.querySelector('.menuaudio');
-menuaudio.loop = true
+
 
 let clickcount = 1;
 
@@ -43,10 +43,14 @@ const menubtn = document.querySelector('.menu-btn')
 const menuclosebtn = document.querySelector('.menu-close-btn')
 
 menubtn.addEventListener('click', () =>{
-    playingaudio.pause()
- menuaudio.play()
+
 
    document.querySelector('.menu').classList.toggle('open-menu')
+
+
+    playingaudio.playbackRate = 0.7;
+    playingaudio.volume = 1
+   
   
   anime({
     targets: '.menu-items h1',
@@ -63,6 +67,10 @@ menubtn.addEventListener('click', () =>{
 
 menuclosebtn.addEventListener('click', () =>{
    document.querySelector('.menu').classList.toggle('open-menu')
+
+    playingaudio.playbackRate = 1;
+    playingaudio.volume = 0.7
+
 
 } )
 
@@ -139,7 +147,6 @@ cameraControls.maxDistance = 1000;
 cameraControls.maxZoom = 100;
 cameraControls.minZoom = 100;
 
-console.log(cameraControls)
 
 document.addEventListener('wheel', e => {
     if (e.deltaY < 0) {
@@ -372,7 +379,6 @@ let bloomeffect = {
 			    bloomPass.threshold = bloomeffect.bloomThreshold
 
                 composer.addPass( bloomPass );
-                console.log(bloomPass)
     
         //  const gui = new GUI( { width: 280 } );
 
@@ -626,35 +632,6 @@ function checkIntersection(){
     }
 
 }
-
-//     document.querySelector('canvas').addEventListener('mousedown', () =>{
-//   console.log(selectedObject)
-
-    
-        
-//             cameraState.cameraMethod = 8;
-//             cameraState.isTargetMoving = true;
-//             cameraState.targetPos = new THREE.Vector3(selectedObject.position.x,0.8,selectedObject.position.z -10)
-//         //  cameraControls.setTarget(selectedObject.position.x,selectedObject.position.y,selectedObject.position.z,true );
-//          //   console.log(cameraControls)
-        
-//             console.log(selectedObject.position)
-//            console.log(cameraControls.getTarget())
-
-        
-          
-             
-//             // if(selectedObject){
-//             //     anime({
-//             //         targets: '#original-position-btn',
-//             //         bottom: '6%',
-//             //         easing: 'easeInOutCubic'
-//             //     })
-            
-//             // }
-            
-        
-//         })
 
 
             const clock = new THREE.Clock();
