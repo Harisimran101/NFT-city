@@ -12,9 +12,10 @@ import { LoadingManager } from 'https://cdn.skypack.dev/three@0.136/src/loaders/
 import { OutlinePass } from 'https://cdn.skypack.dev/three@0.136/examples/jsm/postprocessing/OutlinePass.js';
 
 // Audio Play
-const playingaudio = document.querySelector('.menuaudio')
+const playingaudio = new Audio();
+playingaudio.src = 'menu-audio.mp3'
 playingaudio.loop = true
-playingaudio.volume = 0.7
+playingaudio.volume = 0.8
 const audiobtn = document.querySelector('.audio-icon')
 const audioicon = document.querySelector('.audio-icon i')
 
@@ -30,7 +31,7 @@ audiobtn.addEventListener('click', () =>{
     }
 
     else {
-        playingaudio.volume = 1;
+       playingaudio.volume = 1;
         audioicon.classList = 'bi bi-volume-up-fill'
         clickcount = 1;
     }
@@ -47,10 +48,8 @@ menubtn.addEventListener('click', () =>{
 
    document.querySelector('.menu').classList.toggle('open-menu')
 
-
-    playingaudio.playbackRate = 0.7;
-    playingaudio.volume = 1
-   
+    playingaudio.playbackRate = 1
+   playingaudio.volume = 1
   
   anime({
     targets: '.menu-items h1',
@@ -68,10 +67,8 @@ menubtn.addEventListener('click', () =>{
 menuclosebtn.addEventListener('click', () =>{
    document.querySelector('.menu').classList.toggle('open-menu')
 
-    playingaudio.playbackRate = 1;
-    playingaudio.volume = 0.7
-
-
+   playingaudio.playbackRate = 1;
+playingaudio.volume =1
 } )
 
 
@@ -83,6 +80,21 @@ const modalclosebtn = document.querySelector('.modal-close-btn')
 modalclosebtn.addEventListener('click', () =>{
      newmodal.classList.remove('active-modal')
 })
+
+//  Enter City
+
+document.querySelector('.Enter-btn').addEventListener('click', () =>{
+    playingaudio.play()
+
+    anime({
+        targets: '.preloader',
+        translateX: '-120%',
+        filter: ['blur(0px)','blur(30px)'],
+        easing: 'easeInOutCubic',
+        delay: 200,
+    })                 
+})
+
 
 CameraControls.install( { THREE: THREE } );
 console.log(CameraControls)
@@ -479,13 +491,7 @@ window.addEventListener('resize', function()
 
 manager.onLoad = function ( ) {
 
-anime({
-    targets: '.preloader',
-    translateX: '-120%',
-    filter: ['blur(0px)','blur(30px)'],
-    easing: 'easeInOutCubic',
-    delay: 2500,
-})
+    document.querySelector('.Enter-btn').style.display = 'block'
 
 new RGBELoader().load('Environment/Environment.hdr',function(texture){
     texture.mapping = THREE.EquirectangularReflectionMapping;
@@ -515,7 +521,7 @@ function loadmodel(modelname,modelpos){
            
 model.position.x = modelpos.x; 
 model.position.z = modelpos.z 
-playingaudio.play()
+
 
               let allanimations = []
     

@@ -86,6 +86,20 @@ audio {
 .preloader h1 {
    font-size: 50px;
 }
+
+.Enter-btn {
+    display: none;
+    margin-top: 20px;
+    padding: 9px 45px;
+    background: white;
+    color: black;
+    border: 1px solid rgb(230, 230, 230);
+    border-radius: 9px;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+
 .lil-gui {
    display: block !important;
    position: relative;
