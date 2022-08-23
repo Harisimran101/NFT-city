@@ -65,7 +65,7 @@ menubtn.addEventListener('click', () =>{
    document.querySelector('.menu').classList.toggle('open-menu')
 
    acousticGuitar.effects[0].mix = 1
-    acousticGuitar.volume = 0.45
+    acousticGuitar.volume = 1
   
   anime({
     targets: '.menu-items h1',
