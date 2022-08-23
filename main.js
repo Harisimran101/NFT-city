@@ -31,6 +31,7 @@ let convolver = new Pizzicato.Effects.Convolver({
 
 let acousticGuitar = new Pizzicato.Sound('menu-audio.mp3', function() {
     // Sound loaded!
+    console.log(acousticGuitar)
     acousticGuitar.loop = true
 });
 
@@ -64,7 +65,7 @@ menubtn.addEventListener('click', () =>{
    document.querySelector('.menu').classList.toggle('open-menu')
 
    acousticGuitar.effects[0].mix = 1
-    acousticGuitar.volume = 0.4
+    acousticGuitar.volume = 0.3
   
   anime({
     targets: '.menu-items h1',
