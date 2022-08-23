@@ -12,12 +12,27 @@ import { LoadingManager } from 'https://cdn.skypack.dev/three@0.136/src/loaders/
 import { OutlinePass } from 'https://cdn.skypack.dev/three@0.136/examples/jsm/postprocessing/OutlinePass.js';
 
 // Audio Play
-const playingaudio = new Audio();
-playingaudio.src = 'menu-audio.mp3'
-playingaudio.loop = true
-playingaudio.volume = 0.8
+// const playingaudio = new Audio();
+// playingaudio.src = 'menu-audio.mp3'
+// playingaudio.loop = true
+// playingaudio.volume = 0.85
 const audiobtn = document.querySelector('.audio-icon')
 const audioicon = document.querySelector('.audio-icon i')
+
+let convolver = new Pizzicato.Effects.Convolver({
+    impulse: 'scala-milan.wav',
+    mix: 0,
+}, function(error) {
+    acousticGuitar.addEffect(convolver);
+
+});
+
+
+
+let acousticGuitar = new Pizzicato.Sound('menu-audio.mp3', function() {
+    // Sound loaded!
+    acousticGuitar.loop = true
+});
 
 
 let clickcount = 1;
@@ -25,13 +40,13 @@ let clickcount = 1;
 audiobtn.addEventListener('click', () =>{
 
     if(clickcount == 1){
-        playingaudio.volume = 0;
+        acousticGuitar.volume = 0;
      audioicon.classList = 'bi bi-volume-mute';
      clickcount = 0;
     }
 
     else {
-       playingaudio.volume = 1;
+        acousticGuitar.volume = 1;
         audioicon.classList = 'bi bi-volume-up-fill'
         clickcount = 1;
     }
@@ -48,8 +63,8 @@ menubtn.addEventListener('click', () =>{
 
    document.querySelector('.menu').classList.toggle('open-menu')
 
-    playingaudio.playbackRate = 1
-   playingaudio.volume = 1
+   acousticGuitar.effects[0].mix = 0.9
+    acousticGuitar.volume = 1
   
   anime({
     targets: '.menu-items h1',
@@ -67,8 +82,9 @@ menubtn.addEventListener('click', () =>{
 menuclosebtn.addEventListener('click', () =>{
    document.querySelector('.menu').classList.toggle('open-menu')
 
-   playingaudio.playbackRate = 1;
-playingaudio.volume =1
+   acousticGuitar.effects[0].mix = 0
+
+   acousticGuitar.volume =1
 } )
 
 
@@ -84,7 +100,8 @@ modalclosebtn.addEventListener('click', () =>{
 //  Enter City
 
 document.querySelector('.Enter-btn').addEventListener('click', () =>{
-    playingaudio.play()
+   // playingaudio.play()
+    acousticGuitar.play();
 
     anime({
         targets: '.preloader',
@@ -97,7 +114,6 @@ document.querySelector('.Enter-btn').addEventListener('click', () =>{
 
 
 CameraControls.install( { THREE: THREE } );
-console.log(CameraControls)
 
 let mixer,outlinePass;
 let selectedObjects = [];
