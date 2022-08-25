@@ -56,9 +56,18 @@ menubtn.addEventListener('click', () =>{
 
    document.querySelector('.menu').classList.toggle('open-menu')
 
-   playingaudio.volume = 0
-   menuaudio.volume = 1
-  
+    anime({
+        targets: playingaudio,
+        volume: [1,0],
+        easing: 'easeInOutSine'
+    })
+
+    anime({
+        targets: menuaudio,
+        volume: [0,1],
+        easing: 'easeInOutSine'
+    })
+
   anime({
     targets: '.menu-items h1',
     translateY: ['45px','0px'],
@@ -75,9 +84,18 @@ menubtn.addEventListener('click', () =>{
 menuclosebtn.addEventListener('click', () =>{
    document.querySelector('.menu').classList.toggle('open-menu')
 
+   anime({
+    targets: playingaudio,
+    volume: [0,1],
+    easing: 'easeInOutSine'
+})
 
-   playingaudio.volume =1
-   menuaudio.volume = 0
+anime({
+    targets: menuaudio,
+    volume: [1,0],
+    easing: 'easeInOutSine'
+})
+
 } )
 
 
