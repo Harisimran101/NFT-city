@@ -179,8 +179,9 @@ const cameraControls = new CameraControls( camera, renderer.domElement );
 cameraControls.verticalDragToForward = true;
 cameraControls.dollyToCursor = true;
 
-// cameraControls.maxPolarAngle = (Math.PI * 0.5) - 0.25;
-// cameraControls.minPolarAngle = (Math.PI * 0.5) - 0.3;
+
+cameraControls.maxPolarAngle = (Math.PI * 0.5) - 0.25;
+cameraControls.minPolarAngle = (Math.PI * 0.5) - 0.3;
 cameraControls.minDistance = 400;
 cameraControls.maxDistance = 1000;
 cameraControls.maxZoom = 100;
@@ -418,26 +419,6 @@ let bloomeffect = {
 			    bloomPass.threshold = bloomeffect.bloomThreshold
 
                 composer.addPass( bloomPass );
-    
-        //  const gui = new GUI( { width: 280 } );
-
-        //  gui.add( bloomeffect, 'bloomThreshold', 0.0, 3.0 ).onChange( function ( value ) {
-
-        //     bloomPass.threshold = Number( value );
-
-        // } );
-
-        // gui.add( bloomeffect, 'bloomStrength', 0.0, 3.0 ).onChange( function ( value ) {
-
-        //     bloomPass.strength = Number( value );
-
-        // } );
-
-        // gui.add( bloomeffect, 'bloomRadius', 0.0, 1.0 ).step( 0.01 ).onChange( function ( value ) {
-
-        //     bloomPass.radius = Number( value );
-
-        // } );
 
 
                 const antialiaspass = new SMAAPass( window.innerWidth * renderer.getPixelRatio(), window.innerHeight * renderer.getPixelRatio() );
@@ -678,7 +659,8 @@ function checkIntersection(){
                 if ( mixer ) mixer.update( clock.getDelta() * 8);
                 cameraControls.update(0.01)
                 updateCamera();
-      
+        
+
                  composer.render();
 
 			};
