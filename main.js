@@ -13,12 +13,12 @@ import { OutlinePass } from 'https://cdn.skypack.dev/three@0.136/examples/jsm/po
 
 // Audio Play
 const playingaudio = new Audio();
-playingaudio.src = 'Audio/Main-audio.mp3'
+playingaudio.src = 'Audio/main-music.mp3'
 playingaudio.loop = true
 playingaudio.volume = 1
 
 const menuaudio = new Audio();
-menuaudio.src = 'Audio/low-bass-audio.mp3'
+menuaudio.src = 'Audio/low_bass_audio.mp3'
 menuaudio.loop = true
 menuaudio.volume = 0
 
