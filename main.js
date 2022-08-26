@@ -108,6 +108,10 @@ modalclosebtn.addEventListener('click', () =>{
      newmodal.classList.remove('active-modal')
 })
 
+document.querySelector('.profile-link').addEventListener('click', () =>{
+    newmodal.classList.add('active-modal')
+
+})
 //  Enter City
 
 document.querySelector('.Enter-btn').addEventListener('click', () =>{
@@ -666,12 +670,5 @@ function checkIntersection(){
 			};
 
 			animate();
-
-
-
-
-
-
-
-
+ 
 

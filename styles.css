@@ -385,6 +385,48 @@ transition: 0.7s ease;
     place-items: center;
 }
 
+.search-input {
+    padding: 4px 15px;
+    border-radius: 6px;
+    
+}
+
+.events-images-container {
+    margin-top: 35px;
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.events-images-container img {
+    width: 90px;
+    height: 90px;
+    object-fit: cover;
+    border-radius: 9px;
+    cursor: pointer;
+}
+
+.modal-body-flex {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.signup-options {
+    padding: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap:25px;
+    align-items: center;
+}
+
+.signup-icon {
+    width: 65px;
+    height: auto;
+    cursor: pointer;
+}
+
  @media (max-width: 650px){
    .menu-items h1 {
      font-size: 40px;
