@@ -386,9 +386,16 @@ transition: 0.7s ease;
 }
 
 .search-input {
-    padding: 4px 15px;
-    border-radius: 6px;
-    
+    padding: 7px 15px;
+    border-radius: 40px;
+    border: 1px solid rgba(0,0,0,0.2);
+    transition: 0.3s ease;
+}
+
+.search-input:focus {
+    outline: 0;
+    border: 1px solid rgba(0,0,0,0.8);
+    box-shadow: 0 4px 11px rgba(0,0,0,0.3)
 }
 
 .events-images-container {
@@ -425,6 +432,11 @@ transition: 0.7s ease;
     width: 65px;
     height: auto;
     cursor: pointer;
+    transition: 0.4s ease;
+}
+
+.signup-icon:hover {
+    transform: scale(1.15);
 }
 
 .referal-image {
@@ -454,6 +466,11 @@ transition: 0.7s ease;
     color: white;
     font-size: 19px;
     cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.social-icons i:hover {
+    transform: scale(1.1);
 }
 
 .col .event-image {
@@ -466,6 +483,26 @@ transition: 0.7s ease;
     display: flex;
     align-items: center;
     flex-direction: column;
+}
+
+.youtube-video {
+    border-radius: 12px;
+}
+
+.add-padding {
+    padding: 6px 26px !important;
+}
+
+.bi-facebook {
+    background: #1194F4 !important;
+}
+
+.bi-instagram {
+    background: #FF66F1  !important
+}
+
+.bi-twitter {
+    background: #1D9BF0 !important
 }
 
  @media (max-width: 650px){
