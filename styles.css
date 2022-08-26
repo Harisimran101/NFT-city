@@ -427,6 +427,47 @@ transition: 0.7s ease;
     cursor: pointer;
 }
 
+.referal-image {
+    width: 100%;
+    height: auto;
+    border-radius: 9px;
+}
+
+.dollar-logo {
+    width: 160px;
+    height: auto;
+}
+
+.social-icons {
+    display: flex;
+    align-items: center;
+    gap:10px;
+}
+
+.social-icons i {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: black;
+    color: white;
+    font-size: 19px;
+    cursor: pointer;
+}
+
+.col .event-image {
+    width: 170px;
+    height: auto;
+    border-radius: 7px;
+}
+
+.col {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
  @media (max-width: 650px){
    .menu-items h1 {
      font-size: 40px;
