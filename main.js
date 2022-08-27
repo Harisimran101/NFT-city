@@ -191,6 +191,20 @@ cameraControls.maxDistance = 1000;
 cameraControls.maxZoom = 100;
 cameraControls.minZoom = 100;
 
+cameraControls.boundaryEnclosesCamera = true
+
+
+function setBoundary1 () {
+
+	const bb = new THREE.Box3(
+		new THREE.Vector3( -200.0, 5.0, -220.0 ),
+		new THREE.Vector3( 200.0, 600.0, 220.0 )
+	);
+	cameraControls.setBoundary( bb );
+
+}
+
+setBoundary1()
 
 document.addEventListener('wheel', e => {
     if (e.deltaY < 0) {
@@ -287,14 +301,6 @@ document.addEventListener('mouseup', () => {
 
 
 
-// if(prepos.x-pos.x != 0) {
-// cameraControls.mouseButtons.left = cameraControls.ACTION.ROTATE
-// cameraControls.mouseButtons.right = cameraControls.ACTION.ROTATE
-// }
-// if(prepos.y-pos.y != 0) {
-//     cameraControls.mouseButtons.left = cameraControls.ACTION.TRUCK
-//     cameraControls.mouseButtons.right = cameraControls.ACTION.TRUCK
-//     }
 cameraControls.mouseButtons.left = CameraControls.ACTION.NONE
 cameraControls.mouseButtons.right = CameraControls.ACTION.NONE
 cameraControls.mouseButtons.middle = CameraControls.ACTION.NONE
@@ -526,6 +532,7 @@ loadmodel('NFT-city',new THREE.Vector3(0,0,0))
 
 
 function loadmodel(modelname,modelpos){
+
     
     loader.load(pathaddress + modelname + '.glb', (gltf) =>{
             model = gltf.scene;
