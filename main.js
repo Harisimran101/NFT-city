@@ -191,21 +191,6 @@ cameraControls.maxDistance = 1000;
 cameraControls.maxZoom = 100;
 cameraControls.minZoom = 100;
 
-cameraControls.boundaryEnclosesCamera = true
-
-
-function setBoundary1 () {
-
-	const bb = new THREE.Box3(
-		new THREE.Vector3( -200.0, 5.0, -220.0 ),
-		new THREE.Vector3( 200.0, 600.0, 220.0 )
-	);
-	cameraControls.setBoundary( bb );
-
-}
-
-setBoundary1()
-
 document.addEventListener('wheel', e => {
     if (e.deltaY < 0) {
         cameraState.cameraMethod = Math.min(cameraState.cameraMethod + 1, cameraState.cameraAngle.length - 1);
@@ -598,33 +583,6 @@ model.position.z = modelpos.z
 
 }
 
-// document.querySelector('#original-position-btn').addEventListener('click', () =>{
-//     anime({
-//         targets: camera.position,
-//         x: [camera.position.x,0],
-//         y: [camera.position.y,70],
-//         z: [camera.position.z,130],
-//         duration: 1200,
-//         easing: 'easeInOutSine'
-//     })
-
-//     anime({
-//         targets: controls.target,
-//         x: [controls.target.x,0],
-//         y: [controls.target.y,0],
-//         z: [controls.target.z,0],
-//         duration: 1200,
-//         easing: 'easeInOutSine'
-//     })
-
-//     anime({
-//         targets: '#original-position-btn',
-//         bottom: '-20%',
-//         easing: 'easeInOutCubic'
-//     })
-
-// })
-
 function addSelectedObject( object ) {
 
     selectedObjects = [];
@@ -670,6 +628,8 @@ function checkIntersection(){
                 if ( mixer ) mixer.update( clock.getDelta() * 8);
                 cameraControls.update(0.01)
                 updateCamera();
+
+             
         
 
                  composer.render();
