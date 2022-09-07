@@ -98,6 +98,15 @@ anime({
 
 } )
 
+document.querySelector('.trailer-player-close').addEventListener('click', () =>{
+    document.querySelector('.play-trailer-modal').style.display = 'none'
+})
+
+document.querySelector('.play-trailer-btn').addEventListener('click', () =>{
+    document.querySelector('.play-trailer-modal').style.display = 'grid'
+
+})
+
 
 // Modal logic
 
