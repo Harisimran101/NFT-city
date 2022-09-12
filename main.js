@@ -191,6 +191,13 @@ const basePlane = new THREE.Plane(yAxis, 0);
 const cameraControls = new CameraControls( camera, renderer.domElement );
 cameraControls.verticalDragToForward = true;
 cameraControls.dollyToCursor = true;
+cameraControls.boundaryEnclosesCamera = true
+
+const bb = new THREE.Box3(
+    new THREE.Vector3( -195.0, 5.0, -200.0 ),
+    new THREE.Vector3( 180.0, 500.0, 350.0 )
+);
+cameraControls.setBoundary( bb );
 
 
 cameraControls.maxPolarAngle = (Math.PI * 0.5) - 0.25;
