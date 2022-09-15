@@ -209,9 +209,11 @@ cameraControls.minZoom = 100;
 
 document.addEventListener('wheel', e => {
     if (e.deltaY < 0) {
-        cameraState.cameraMethod = Math.min(cameraState.cameraMethod + 1, cameraState.cameraAngle.length - 1);
+        console.log(Math.min(cameraState.cameraMethod + 2, cameraState.cameraAngle.length - 1))
+        cameraState.cameraMethod = Math.min(cameraState.cameraMethod + 2, cameraState.cameraAngle.length - 1);
     } else {
-        cameraState.cameraMethod = Math.max(cameraState.cameraMethod - 1, 0);
+        cameraState.cameraMethod = Math.max(cameraState.cameraMethod -2, 0);
+        console.log('else ' + Math.max(cameraState.cameraMethod - 2, 0))
     }
 })
 document.querySelector('canvas').addEventListener('mousedown', e => {
@@ -490,7 +492,9 @@ window.addEventListener('resize', function()
         newelem.id = name;
         document.body.appendChild(newelem)
          return newelem
-    }
+        }
+
+   
 
 
  // Model loading   
