@@ -168,8 +168,8 @@ const cameraState = {
     mousePos: new THREE.Vector2(0, 0),
     virtualMousePos: new THREE.Vector2(0, 0),
     cameraAngle: [
-        new THREE.Vector3(200, 100, 0),
-        new THREE.Vector3(200, 100, 0),
+        new THREE.Vector3(250, 165, 0),
+        new THREE.Vector3(250, 165, 0),
         new THREE.Vector3(200, 100, 0),
         new THREE.Vector3(200, 100, 0),
         new THREE.Vector3(200, 100, 0),
