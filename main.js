@@ -285,7 +285,7 @@ const updateCamera = () => {
     const direction = xAxis.clone().cross(projectedAngle).normalize().y;
     const angle = (Math.PI * 2 + xAxis.angleTo(projectedAngle) * direction) % (Math.PI * 2);
     const normalizedAngle = cameraAngle.clone().applyAxisAngle(yAxis, -angle);
-    const newNormalizedAngle = normalizedAngle.add(cameraState.cameraAngle[cameraState.cameraMethod].clone().sub(normalizedAngle).multiplyScalar(0.07));
+    const newNormalizedAngle = normalizedAngle.add(cameraState.cameraAngle[cameraState.cameraMethod].clone().sub(normalizedAngle).multiplyScalar(0.03));
     const newCameraAngle = newNormalizedAngle.applyAxisAngle(yAxis, angle);
     const newCameraPos = targetPos.clone().add(newCameraAngle);
 
