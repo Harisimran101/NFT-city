@@ -168,12 +168,9 @@ const cameraState = {
     mousePos: new THREE.Vector2(0, 0),
     virtualMousePos: new THREE.Vector2(0, 0),
     cameraAngle: [
-        new THREE.Vector3(50, 600, 0),
-        new THREE.Vector3(150, 500, 0),
-        new THREE.Vector3(250, 400, 0),
-        new THREE.Vector3(300, 350, 0),
-        new THREE.Vector3(300, 300, 0),
-        new THREE.Vector3(300, 200, 0),
+    
+        new THREE.Vector3(200, 100, 0),
+        new THREE.Vector3(200, 100, 0),
         new THREE.Vector3(200, 100, 0),
         new THREE.Vector3(130, 50, 0),
         new THREE.Vector3(100, 40, 0),
@@ -195,7 +192,7 @@ cameraControls.boundaryEnclosesCamera = true
 
 const bb = new THREE.Box3(
     new THREE.Vector3( -195.0, 5.0, -200.0 ),
-    new THREE.Vector3( 180.0, 380.0, 350.0 )
+    new THREE.Vector3( 180.0, 180.0, 350.0 )
 );
 cameraControls.setBoundary( bb );
 
@@ -209,8 +206,11 @@ cameraControls.minZoom = 100;
 
 document.addEventListener('wheel', e => {
     if (e.deltaY < 0) {
-        console.log(Math.min(cameraState.cameraMethod + 3, cameraState.cameraAngle.length - 1))
-        cameraState.cameraMethod = Math.min(cameraState.cameraMethod + 3, cameraState.cameraAngle.length - 1);
+        
+            console.log(Math.min(cameraState.cameraMethod + 3, cameraState.cameraAngle.length - 1))
+            cameraState.cameraMethod = Math.min(cameraState.cameraMethod + 3, cameraState.cameraAngle.length - 1);
+        
+      
     } else {
         cameraState.cameraMethod = Math.max(cameraState.cameraMethod -3, 0);
         console.log('else ' + Math.max(cameraState.cameraMethod - 3, 0))
