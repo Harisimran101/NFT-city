@@ -195,7 +195,7 @@ cameraControls.boundaryEnclosesCamera = true
 
 const bb = new THREE.Box3(
     new THREE.Vector3( -195.0, 5.0, -200.0 ),
-    new THREE.Vector3( 180.0, 500.0, 350.0 )
+    new THREE.Vector3( 180.0, 380.0, 350.0 )
 );
 cameraControls.setBoundary( bb );
 
