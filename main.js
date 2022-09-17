@@ -193,7 +193,7 @@ cameraControls.dollyToCursor = true;
 cameraControls.boundaryEnclosesCamera = true
 
 const bb = new THREE.Box3(
-    new THREE.Vector3( -195.0, 5.0, -200.0 ),
+    new THREE.Vector3( -195.0, 35.0, -200.0 ),
     new THREE.Vector3( 180.0, 180.0, 350.0 )
 );
 cameraControls.setBoundary( bb );
@@ -534,19 +534,18 @@ new RGBELoader().load('Environment/Environment.hdr',function(texture){
 
 const pathaddress = 'Models/';
 
-loadmodel('NFT-city',new THREE.Vector3(0,0,0))
+loadmodel('NFT-city')
 
 
 
-function loadmodel(modelname,modelpos){
+function loadmodel(modelname){
 
     
     loader.load(pathaddress + modelname + '.glb', (gltf) =>{
             model = gltf.scene;
               scene.add(model)
            
-model.position.x = modelpos.x; 
-model.position.z = modelpos.z 
+
 
 
               let allanimations = []
@@ -562,21 +561,8 @@ model.position.z = modelpos.z
               
               mixer.clipAction(el).setDuration( 1 ).play();
               })
-    
-              model.scale.set(1,1,1)
-    
-              let annoobjs = [
-                {pos: new THREE.Vector3(-190,25,-120)},
-                {pos: new THREE.Vector3(0,25,-120)},
-                {pos: new THREE.Vector3(210,25,-120)},
-                {pos: new THREE.Vector3(-190,25,250)},
-                {pos: new THREE.Vector3(0,25,250)},
-                {pos: new THREE.Vector3(210,25,250)},
-                {pos: new THREE.Vector3(-100,25,60)},
-                {pos: new THREE.Vector3(105,25,60)},
 
-              ]
-
+   
               gltf.scene.traverse((child) =>{
 
                 //  allobjs.push(child)
@@ -639,6 +625,7 @@ function checkIntersection(){
 }
 
 
+
             const clock = new THREE.Clock();
 
             // Animate
@@ -650,9 +637,8 @@ function checkIntersection(){
                 if ( mixer ) mixer.update( clock.getDelta() * 8);
                 cameraControls.update(0.01)
                 updateCamera();
-
              
-        
+                console.log(camera.position)
 
                  composer.render();
 
