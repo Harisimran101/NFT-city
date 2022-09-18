@@ -527,7 +527,7 @@ window.addEventListener('resize', function()
 
    
 
-        const boundingspheregeometry = new THREE.SphereGeometry(210,10,10);
+        const boundingspheregeometry = new THREE.SphereGeometry(215,10,10);
         const boundingsphere = new THREE.Mesh(boundingspheregeometry,new THREE.MeshBasicMaterial())
         scene.add(boundingsphere) 
         boundingsphere.visible = false
