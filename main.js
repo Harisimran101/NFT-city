@@ -114,18 +114,19 @@ const camera_resetbtn = document.querySelector('.reset-camera-btn')
 document.addEventListener('mousemove', () =>{
     console.log(camera.position)
      if(camera.position.x > 235 || camera.position.x < -266){
-        camera_resetbtn.classList.add('active-camera-btn')
+        cameraControls.fitToSphere( boundingsphere, false )
+
+        
      }
 
      
 
     else if(camera.position.z >285 || camera.position.z < -265){
-        camera_resetbtn.classList.add('active-camera-btn')
+       
+        cameraControls.fitToSphere( boundingsphere, false )
+
     }
 
-    else {
-        camera_resetbtn.classList.remove('active-camera-btn')
-    }
 
  
 })
@@ -134,6 +135,7 @@ camera_resetbtn.addEventListener('click', () =>{
      cameraControls.setPosition( -16, 120, 140,true)
 })
 
+// cameraControls.fitToSphere( sphereOrMesh, enableTransition )
 
 // Modal logic
 
@@ -525,6 +527,10 @@ window.addEventListener('resize', function()
 
    
 
+        const boundingspheregeometry = new THREE.SphereGeometry(210,10,10);
+        const boundingsphere = new THREE.Mesh(boundingspheregeometry,new THREE.MeshBasicMaterial())
+        scene.add(boundingsphere) 
+        boundingsphere.visible = false
 
  // Model loading   
 
