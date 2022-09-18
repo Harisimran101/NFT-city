@@ -107,6 +107,33 @@ document.querySelector('.play-trailer-btn').addEventListener('click', () =>{
 
 })
 
+// Camera reset logic
+
+const camera_resetbtn = document.querySelector('.reset-camera-btn')
+
+document.addEventListener('mousemove', () =>{
+    console.log(camera.position)
+     if(camera.position.x > 235 || camera.position.x < -266){
+        camera_resetbtn.classList.add('active-camera-btn')
+     }
+
+     
+
+    else if(camera.position.z >285 || camera.position.z < -265){
+        camera_resetbtn.classList.add('active-camera-btn')
+    }
+
+    else {
+        camera_resetbtn.classList.remove('active-camera-btn')
+    }
+
+ 
+})
+
+camera_resetbtn.addEventListener('click', () =>{
+     cameraControls.setPosition( -16, 120, 140,true)
+})
+
 
 // Modal logic
 
@@ -190,13 +217,13 @@ const basePlane = new THREE.Plane(yAxis, 0);
 const cameraControls = new CameraControls( camera, renderer.domElement );
 cameraControls.verticalDragToForward = true;
 cameraControls.dollyToCursor = true;
-cameraControls.boundaryEnclosesCamera = true
+// cameraControls.boundaryEnclosesCamera = true
 
-const bb = new THREE.Box3(
-    new THREE.Vector3( -195.0, 35.0, -200.0 ),
-    new THREE.Vector3( 180.0, 180.0, 350.0 )
-);
-cameraControls.setBoundary( bb );
+// const bb = new THREE.Box3(
+//     new THREE.Vector3( -195.0, 35.0, -200.0 ),
+//     new THREE.Vector3( 180.0, 180.0, 350.0 )
+// );
+// cameraControls.setBoundary( bb );
 
 
 cameraControls.maxPolarAngle = (Math.PI * 0.5) - 0.25;
@@ -638,7 +665,6 @@ function checkIntersection(){
                 cameraControls.update(0.01)
                 updateCamera();
              
-                console.log(camera.position)
 
                  composer.render();
 
