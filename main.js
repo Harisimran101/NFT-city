@@ -111,20 +111,61 @@ document.querySelector('.play-trailer-btn').addEventListener('click', () =>{
 
 const camera_resetbtn = document.querySelector('.reset-camera-btn')
 
-document.addEventListener('mousemove', () =>{
+document.addEventListener('mousedown', () =>{
     console.log(camera.position)
-     if(camera.position.x > 235 || camera.position.x < -266){
-        cameraControls.fitToSphere( boundingsphere, false )
+     if(camera.position.x > 275 || camera.position.x < -290){
+       // cameraControls.fitToSphere( boundingsphere, false )
+     
 
-        
+        cameraControls.fitToBox( boundingsphere, false  )
      }
 
      
 
-    else if(camera.position.z >285 || camera.position.z < -265){
+    else if(camera.position.z >300 || camera.position.z < -300){
        
-        cameraControls.fitToSphere( boundingsphere, false )
+       // cameraControls.fitToSphere( boundingsphere, false )
+        cameraControls.fitToBox( boundingsphere, false)
+        
+    }
 
+    else if(camera.position.z >250 || camera.position.z < -250){
+        anime({
+            targets: fadevalue,
+            value: [fadevalue.value,1],
+            ease: 'easeInOutSine',
+            duration: 2000,
+            complete: function(){
+                anime({
+                    targets: fadevalue,
+                    value: [fadevalue.value,0],
+                    ease: 'easeInOutSine',
+                    duration: 1000,
+                    delay: 1300
+                   })
+            },
+            delay:100
+           })
+    }
+
+    else if(camera.position.x > 235 || camera.position.x < -240){
+        anime({
+            targets: fadevalue,
+            value: [fadevalue.value,1],
+            ease: 'easeInOutSine',
+            duration: 2000,
+            complete: function(){
+                anime({
+                    targets: fadevalue,
+                    value: [fadevalue.value,0],
+                    ease: 'easeInOutSine',
+                    duration: 1000,
+                    delay: 1300
+                   })
+            },
+            delay:100
+           })
+        
     }
 
 
@@ -526,12 +567,47 @@ window.addEventListener('resize', function()
         }
 
    
+        const boundingshader = new THREE.ShaderMaterial( {
 
-        const boundingspheregeometry = new THREE.SphereGeometry(215,10,10);
-        const boundingsphere = new THREE.Mesh(boundingspheregeometry,new THREE.MeshBasicMaterial())
+            uniforms: {
+        
+                time: { value: 1.0 },
+                resolution: { value: new THREE.Vector2() },
+                alpha: {value: 1.0},
+            },
+        
+            vertexShader: `
+               varying vec2 uUV;
+
+               void main(){
+                  gl_Position = projectionMatrix * modelViewMatrix * vec4(position,1.0);
+                   uUV = uv;
+               } 
+            `,
+        
+            fragmentShader: `
+            uniform float time;
+            uniform float alpha;
+            varying vec2 uUV;
+
+            void main() {
+                 
+                 
+                gl_FragColor = vec4(0.0,0.0,1.0, alpha);
+            }
+            `,
+            
+            wireframe: true,
+            transparent: true
+        } );
+
+
+        const boundingspheregeometry = new THREE.BoxGeometry(640,500,700,70,70,70);
+        const boundingsphere = new THREE.Mesh(boundingspheregeometry,boundingshader)
         scene.add(boundingsphere) 
-        boundingsphere.visible = false
+        boundingsphere.visible = true
 
+       
  // Model loading   
 
  let model;
@@ -563,6 +639,11 @@ new RGBELoader().load('Environment/Environment.hdr',function(texture){
 //  dracoLoader.setDecoderPath( 'draco/gltf/' );
  
 //  loader.setDRACOLoader( dracoLoader );
+
+let fadevalue = {
+    value: 0.0
+};
+
 
 
 const pathaddress = 'Models/';
@@ -657,7 +738,7 @@ function checkIntersection(){
 
 }
 
-
+let time = 0;
 
             const clock = new THREE.Clock();
 
@@ -670,7 +751,9 @@ function checkIntersection(){
                 if ( mixer ) mixer.update( clock.getDelta() * 8);
                 cameraControls.update(0.01)
                 updateCamera();
-             
+               time += 0.01
+
+              boundingshader.uniforms.alpha.value = fadevalue.value;
 
                  composer.render();
 
