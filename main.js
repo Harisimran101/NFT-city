@@ -602,7 +602,7 @@ window.addEventListener('resize', function()
         } );
 
 
-        const boundingspheregeometry = new THREE.BoxGeometry(640,500,700,70,70,70);
+        const boundingspheregeometry = new THREE.BoxGeometry(640,550,700,70,70,70);
         const boundingsphere = new THREE.Mesh(boundingspheregeometry,boundingshader)
         scene.add(boundingsphere) 
         boundingsphere.visible = true
