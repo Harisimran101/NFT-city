@@ -129,7 +129,7 @@ document.addEventListener('mousedown', () =>{
         
     }
 
-    else if(camera.position.z >250 || camera.position.z < -250){
+    else if(camera.position.z >230 || camera.position.z < -235){
         anime({
             targets: fadevalue,
             value: [fadevalue.value,1],
@@ -141,14 +141,14 @@ document.addEventListener('mousedown', () =>{
                     value: [fadevalue.value,0],
                     ease: 'easeInOutSine',
                     duration: 1000,
-                    delay: 1300
+                    delay: 1200
                    })
             },
             delay:100
            })
     }
 
-    else if(camera.position.x > 235 || camera.position.x < -240){
+    else if(camera.position.x > 220 || camera.position.x < -220){
         anime({
             targets: fadevalue,
             value: [fadevalue.value,1],
@@ -160,7 +160,7 @@ document.addEventListener('mousedown', () =>{
                     value: [fadevalue.value,0],
                     ease: 'easeInOutSine',
                     duration: 1000,
-                    delay: 1300
+                    delay: 1200
                    })
             },
             delay:100
