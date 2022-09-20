@@ -11,6 +11,15 @@ body {
    overflow: hidden;
 }
 
+#webgl {
+    position: absolute;
+    left: 0;
+    top: 0;
+     width: 100vw;
+     height: 100vh;
+
+}
+
 audio {
     display: none;
 }
@@ -134,6 +143,7 @@ audio {
    align-items: center;
    justify-content: space-between;
    padding: 8px 20px;
+   z-index: 100;
    background: transparent
  }
  

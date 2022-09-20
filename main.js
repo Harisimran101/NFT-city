@@ -11,8 +11,14 @@ import { GUI } from 'https://cdn.skypack.dev/three@0.136/examples/jsm/libs/lil-g
 import { LoadingManager } from 'https://cdn.skypack.dev/three@0.136/src/loaders/LoadingManager.js';
 import { OutlinePass } from 'https://cdn.skypack.dev/three@0.136/examples/jsm/postprocessing/OutlinePass.js';
 
+const canvas = document.querySelector('#webgl')
 
 
+const sizes = {
+     width: canvas.offsetWidth,
+     height: canvas.offsetHeight
+
+}
 // Audio Play
 const playingaudio = new Audio();
 playingaudio.src = 'Audio/main-music.mp3'
@@ -113,7 +119,7 @@ document.querySelector('.play-trailer-btn').addEventListener('click', () =>{
 
 const camera_resetbtn = document.querySelector('.reset-camera-btn')
 
-document.addEventListener('mousedown', () =>{
+canvas.addEventListener('mousedown', () =>{
     console.log(camera.position)
      if(camera.position.x > 275 || camera.position.x < -290){
        // cameraControls.fitToSphere( boundingsphere, false )
@@ -124,7 +130,7 @@ document.addEventListener('mousedown', () =>{
         delay: 200,
         duration: 1000,
         complete: function(){
-            document.querySelector('.outofrange-screen').style.pointEvents = 'all'
+            document.querySelector('.outofrange-screen').style.pointerEvents = 'all'
             anime({
                 targets: '.outofrange-screen h1',
                 translateY: ['1200%','0%'],
@@ -143,7 +149,7 @@ document.addEventListener('mousedown', () =>{
                 opacity: 0,
                 duration: 1000,
                 complete: function(){
-                    document.querySelector('.outofrange-screen').style.pointEvents = 'none'
+                    document.querySelector('.outofrange-screen').style.pointerEvents = 'none'
                     
                }
                })
@@ -163,7 +169,7 @@ document.addEventListener('mousedown', () =>{
             delay: 200,
             duration: 1000,
             complete: function(){
-                 document.querySelector('.outofrange-screen').style.pointEvents = 'all'
+                 document.querySelector('.outofrange-screen').style.pointerEvents = 'all'
                  anime({
                     targets: '.outofrange-screen h1',
                     translateY: ['1200%','0%'],
@@ -184,7 +190,7 @@ document.addEventListener('mousedown', () =>{
         opacity: 0,
         duration: 1000,
         complete: function(){
-            document.querySelector('.outofrange-screen').style.pointEvents = 'none'
+            document.querySelector('.outofrange-screen').style.pointerEvents = 'none'
             
        }
        })
@@ -283,15 +289,16 @@ let selectedObjects = [];
             scene.background = new THREE.Color('#4E005B')
          
              // Camera
- 			const camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 0.001, 15000 );
+ 			const camera = new THREE.PerspectiveCamera( 40,  sizes.width /  sizes.height, 0.001, 15000 );
             camera.position.set(0,150,240)
 
             // Renderer
 			const renderer = new THREE.WebGLRenderer({
                 antialias: true,
+                canvas: canvas,
                 logarithmicDepthBuffer: true
             });
-			renderer.setSize( window.innerWidth, window.innerHeight );
+			renderer.setSize(  sizes.width,  sizes.height );
 			document.body.appendChild( renderer.domElement );
             renderer.setPixelRatio( window.devicePixelRatio / 1.4);
 
@@ -354,7 +361,7 @@ document.addEventListener('wheel', e => {
         console.log('else ' + Math.max(cameraState.cameraMethod - 3, 0))
     }
 })
-document.querySelector('canvas').addEventListener('mousedown', e => {
+canvas.addEventListener('mousedown', e => {
     cameraState.isClicked = true;
     cameraState.mousePos.setX(e.pageX);   cameraState.mousePos.setY(e.pageY);
     cameraState.targetPos = cameraControls.getTarget();
@@ -505,8 +512,8 @@ function onPointerMove( event ) {
 
 
 
-	pointer.x = ( event.clientX / window.innerWidth ) * 2 - 1;
-	pointer.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
+	pointer.x = ( event.clientX / sizes.width ) * 2 - 1;
+	pointer.y = - ( event.clientY /  sizes.height ) * 2 + 1;
     checkIntersection();
 
 }
@@ -566,18 +573,18 @@ let bloomeffect = {
 				const composer = new EffectComposer( renderer );
 				composer.addPass( renderScene );
 
-                const bloomPass = new UnrealBloomPass( new THREE.Vector2( window.innerWidth, window.innerHeight ), bloomeffect.bloomThreshold, bloomeffect.bloomStrength, bloomeffect.bloomRadius );
+                const bloomPass = new UnrealBloomPass( new THREE.Vector2(  sizes.width,  sizes.height ), bloomeffect.bloomThreshold, bloomeffect.bloomStrength, bloomeffect.bloomRadius );
 			    bloomPass.threshold = bloomeffect.bloomThreshold
 
                 composer.addPass( bloomPass );
 
 
-                const antialiaspass = new SMAAPass( window.innerWidth * renderer.getPixelRatio(), window.innerHeight * renderer.getPixelRatio() );
+                const antialiaspass = new SMAAPass(  sizes.width * renderer.getPixelRatio(),  sizes.height * renderer.getPixelRatio() );
 				composer.addPass( antialiaspass );
 
                 // Outline Pass
 
-                outlinePass = new OutlinePass( new THREE.Vector2( window.innerWidth, window.innerHeight ), scene, camera );
+                outlinePass = new OutlinePass( new THREE.Vector2(  sizes.width,  sizes.height ), scene, camera );
 				composer.addPass( outlinePass );
 
 			const params = {
@@ -613,12 +620,11 @@ scene.add( light );
 window.addEventListener('resize', function()
 
 	{
-	let width = window.innerWidth;
-	let height = window.innerHeight;
-	renderer.setSize( width, height );
+
+	renderer.setSize(  sizes.width,  sizes.height );
     renderer.setPixelRatio( window.devicePixelRatio /1.5 );
 
-	camera.aspect = width / height;
+	camera.aspect =  sizes.width /  sizes.height;
 	camera.updateProjectionMatrix();
 	} );
 
