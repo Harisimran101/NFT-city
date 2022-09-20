@@ -11,6 +11,8 @@ import { GUI } from 'https://cdn.skypack.dev/three@0.136/examples/jsm/libs/lil-g
 import { LoadingManager } from 'https://cdn.skypack.dev/three@0.136/src/loaders/LoadingManager.js';
 import { OutlinePass } from 'https://cdn.skypack.dev/three@0.136/examples/jsm/postprocessing/OutlinePass.js';
 
+
+
 // Audio Play
 const playingaudio = new Audio();
 playingaudio.src = 'Audio/main-music.mp3'
@@ -115,17 +117,81 @@ document.addEventListener('mousedown', () =>{
     console.log(camera.position)
      if(camera.position.x > 275 || camera.position.x < -290){
        // cameraControls.fitToSphere( boundingsphere, false )
-     
+    
+       anime({
+        targets: '.outofrange-screen',
+        opacity: 1,
+        delay: 200,
+        duration: 1000,
+        complete: function(){
+            document.querySelector('.outofrange-screen').style.pointEvents = 'all'
+            anime({
+                targets: '.outofrange-screen h1',
+                translateY: ['1200%','0%'],
+                duration: 800,
+                delay: function(el,i){
+                    return (i * 40)
+                },
+                ease: 'easeInOutCubic'
+            })
+       }
+    })
+        
+        setTimeout(() =>{
+            anime({
+                targets: '.outofrange-screen',
+                opacity: 0,
+                duration: 1000,
+                complete: function(){
+                    document.querySelector('.outofrange-screen').style.pointEvents = 'none'
+                    
+               }
+               })
+            cameraControls.fitToBox( boundingsphere, false  )
 
-        cameraControls.fitToBox( boundingsphere, false  )
+        },3500)
+
      }
 
      
 
     else if(camera.position.z >300 || camera.position.z < -300){
        
+        anime({
+            targets: '.outofrange-screen',
+            opacity: 1,
+            delay: 200,
+            duration: 1000,
+            complete: function(){
+                 document.querySelector('.outofrange-screen').style.pointEvents = 'all'
+                 anime({
+                    targets: '.outofrange-screen h1',
+                    translateY: ['1200%','0%'],
+                    duration: 800,
+                    delay: function(el,i){
+                        return (i * 40)
+                    },
+                    ease: 'easeInOutCubic'
+
+                })
+            }
+        })
+         
        // cameraControls.fitToSphere( boundingsphere, false )
-        cameraControls.fitToBox( boundingsphere, false)
+       setTimeout(() =>{
+       anime({
+        targets: '.outofrange-screen',
+        opacity: 0,
+        duration: 1000,
+        complete: function(){
+            document.querySelector('.outofrange-screen').style.pointEvents = 'none'
+            
+       }
+       })
+
+        cameraControls.fitToBox( boundingsphere, false  )
+
+    },3500)
         
     }
 
