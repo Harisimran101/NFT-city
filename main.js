@@ -129,7 +129,7 @@ canvas.addEventListener('mousedown', () =>{
         opacity: 1,
         delay: 200,
         duration: 1000,
-        complete: function(){
+        begin: function(){
             document.querySelector('.outofrange-screen').style.pointerEvents = 'all'
             anime({
                 targets: '.outofrange-screen h1',
@@ -168,7 +168,7 @@ canvas.addEventListener('mousedown', () =>{
             opacity: 1,
             delay: 200,
             duration: 1000,
-            complete: function(){
+            begin: function(){
                  document.querySelector('.outofrange-screen').style.pointerEvents = 'all'
                  anime({
                     targets: '.outofrange-screen h1',
