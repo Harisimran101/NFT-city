@@ -160,7 +160,7 @@ canvas.addEventListener('mousedown', () =>{
                setTimeout(() =>{
                 canvas.style.pointerEvents = 'all'
         
-               },2000)
+               },4500)
 
         },3000)
 
@@ -208,7 +208,7 @@ canvas.addEventListener('mousedown', () =>{
        setTimeout(() =>{
         canvas.style.pointerEvents = 'all'
 
-       },2000)
+       },4500)
 
     },3000)
 
