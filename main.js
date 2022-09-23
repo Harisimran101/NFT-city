@@ -153,9 +153,13 @@ canvas.addEventListener('mousedown', () =>{
                     
                }
                })
-            cameraControls.fitToBox( boundingsphere, false  )
 
-        },3500)
+        },3000)
+
+        setTimeout(() =>{
+            cameraControls.fitToBox( boundingsphere, false  )
+    
+        },800)
 
      }
 
@@ -195,9 +199,12 @@ canvas.addEventListener('mousedown', () =>{
        }
        })
 
+    },3000)
+
+    setTimeout(() =>{
         cameraControls.fitToBox( boundingsphere, false  )
 
-    },3500)
+    },800)
         
     }
 
