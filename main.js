@@ -153,19 +153,23 @@ canvas.addEventListener('mousedown', () =>{
                     
                }
                })
+               cameraControls.fitToBox( boundingsphere, false  )
+
+               canvas.style.pointerEvents = 'none'
+
+               setTimeout(() =>{
+                canvas.style.pointerEvents = 'all'
+        
+               },2000)
 
         },3000)
 
-        setTimeout(() =>{
-            cameraControls.fitToBox( boundingsphere, false  )
-    
-        },800)
 
      }
 
      
 
-    else if(camera.position.z >300 || camera.position.z < -300){
+    else if(camera.position.z >430 || camera.position.z < -350){
        
         anime({
             targets: '.outofrange-screen',
@@ -198,17 +202,21 @@ canvas.addEventListener('mousedown', () =>{
             
        }
        })
+       cameraControls.fitToBox( boundingsphere, false  )
+       canvas.style.pointerEvents = 'none'
+
+       setTimeout(() =>{
+        canvas.style.pointerEvents = 'all'
+
+       },2000)
 
     },3000)
 
-    setTimeout(() =>{
-        cameraControls.fitToBox( boundingsphere, false  )
-
-    },800)
+    
         
     }
 
-    else if(camera.position.z >230 || camera.position.z < -235){
+    else if(camera.position.z >340 || camera.position.z < -275){
         anime({
             targets: fadevalue,
             value: [fadevalue.value,1],
@@ -220,7 +228,7 @@ canvas.addEventListener('mousedown', () =>{
                     value: [fadevalue.value,0],
                     ease: 'easeInOutSine',
                     duration: 1000,
-                    delay: 1200
+                    delay: 800
                    })
             },
             delay:100
@@ -239,7 +247,7 @@ canvas.addEventListener('mousedown', () =>{
                     value: [fadevalue.value,0],
                     ease: 'easeInOutSine',
                     duration: 1000,
-                    delay: 1200
+                    delay: 800
                    })
             },
             delay:100
@@ -681,7 +689,7 @@ window.addEventListener('resize', function()
         } );
 
 
-        const boundingspheregeometry = new THREE.BoxGeometry(640,550,700,70,70,70);
+        const boundingspheregeometry = new THREE.BoxGeometry(640,550,900,70,70,70);
         const boundingsphere = new THREE.Mesh(boundingspheregeometry,boundingshader)
         scene.add(boundingsphere) 
         boundingsphere.visible = true
