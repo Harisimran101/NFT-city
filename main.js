@@ -128,13 +128,13 @@ canvas.addEventListener('mousedown', () =>{
         targets: '.outofrange-screen',
         opacity: 1,
         delay: 200,
-        duration: 1000,
+        duration: 700,
         begin: function(){
             document.querySelector('.outofrange-screen').style.pointerEvents = 'all'
             anime({
                 targets: '.outofrange-screen h1',
                 translateY: ['1200%','0%'],
-                duration: 800,
+                duration: 600,
                 delay: function(el,i){
                     return (i * 40)
                 },
@@ -160,9 +160,9 @@ canvas.addEventListener('mousedown', () =>{
                setTimeout(() =>{
                 canvas.style.pointerEvents = 'all'
         
-               },4500)
+               },2500)
 
-        },3000)
+        },1200)
 
 
      }
@@ -175,13 +175,13 @@ canvas.addEventListener('mousedown', () =>{
             targets: '.outofrange-screen',
             opacity: 1,
             delay: 200,
-            duration: 1000,
+            duration: 700,
             begin: function(){
                  document.querySelector('.outofrange-screen').style.pointerEvents = 'all'
                  anime({
                     targets: '.outofrange-screen h1',
                     translateY: ['1200%','0%'],
-                    duration: 800,
+                    duration: 600,
                     delay: function(el,i){
                         return (i * 40)
                     },
@@ -196,7 +196,7 @@ canvas.addEventListener('mousedown', () =>{
        anime({
         targets: '.outofrange-screen',
         opacity: 0,
-        duration: 1000,
+        duration: 700,
         complete: function(){
             document.querySelector('.outofrange-screen').style.pointerEvents = 'none'
             
@@ -208,9 +208,9 @@ canvas.addEventListener('mousedown', () =>{
        setTimeout(() =>{
         canvas.style.pointerEvents = 'all'
 
-       },4500)
+       },2500)
 
-    },3000)
+    },1200)
 
     
         
