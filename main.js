@@ -54,6 +54,19 @@ audiobtn.addEventListener('click', () =>{
      
 })
 
+
+// Camera Collision Logic
+const collisionaudio = new Audio()
+collisionaudio.src = 'Audio/Collision.mp3'
+
+function playcollisionaudio(){
+
+    collisionaudio.play()
+    
+}
+
+
+
 // Menu Logic 
 
 const menubtn = document.querySelector('.menu-btn')
@@ -142,7 +155,8 @@ canvas.addEventListener('mousedown', () =>{
             })
        }
     })
-        
+    playcollisionaudio()
+
         setTimeout(() =>{
             anime({
                 targets: '.outofrange-screen',
@@ -154,7 +168,7 @@ canvas.addEventListener('mousedown', () =>{
                }
                })
                cameraControls.fitToBox( boundingsphere, false  )
-
+            
                canvas.style.pointerEvents = 'none'
 
                setTimeout(() =>{
@@ -190,7 +204,8 @@ canvas.addEventListener('mousedown', () =>{
                 })
             }
         })
-         
+        playcollisionaudio()
+
        // cameraControls.fitToSphere( boundingsphere, false )
        setTimeout(() =>{
        anime({
@@ -203,6 +218,7 @@ canvas.addEventListener('mousedown', () =>{
        }
        })
        cameraControls.fitToBox( boundingsphere, false  )
+ 
        canvas.style.pointerEvents = 'none'
 
        setTimeout(() =>{

@@ -348,7 +348,7 @@ padding: 90px 18px;
     left: 50%;
     top: 50%;
     transform: translate(-50%,110%);
-    z-index: 1000;
+    z-index: 10000;
     border-radius: 12px;
 transition: 0.7s ease;
 }
@@ -609,7 +609,7 @@ transition: 0.4s ease;
      height: 100vh;
      background: rgba(0,0,0,0.45);
      backdrop-filter: blur(32px);
-     z-index: 1000;
+     z-index: 10000;
 }
 
 .play-trailer-modal iframe{
