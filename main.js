@@ -10,6 +10,9 @@ import { GUI } from 'https://cdn.skypack.dev/three@0.136/examples/jsm/libs/lil-g
 // import { DRACOLoader } from 'https://cdn.skypack.dev/three@0.136/examples/jsm/loaders/DRACOLoader.js';
 import { LoadingManager } from 'https://cdn.skypack.dev/three@0.136/src/loaders/LoadingManager.js';
 import { OutlinePass } from 'https://cdn.skypack.dev/three@0.136/examples/jsm/postprocessing/OutlinePass.js';
+import { flies } from './Createflies.js';
+
+
 
 const canvas = document.querySelector('#webgl')
 
@@ -326,9 +329,9 @@ let selectedObjects = [];
             });
 			renderer.setSize(  sizes.width,  sizes.height );
 			document.body.appendChild( renderer.domElement );
-            renderer.setPixelRatio( window.devicePixelRatio / 1.4);
+            renderer.setPixelRatio( window.devicePixelRatio / 1.2);
 
-
+flies(200,scene)
 
 
 // Camera Controls
@@ -660,7 +663,7 @@ window.addEventListener('resize', function()
 	{
 
 	renderer.setSize(  sizes.width,  sizes.height );
-    renderer.setPixelRatio( window.devicePixelRatio /1.5 );
+    renderer.setPixelRatio( window.devicePixelRatio /1.2 );
 
 	camera.aspect =  sizes.width /  sizes.height;
 	camera.updateProjectionMatrix();
