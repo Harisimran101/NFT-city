@@ -570,7 +570,7 @@ window.addEventListener( 'pointermove', onPointerMove );
 let bloomeffect = {
     bloomThreshold: 0.7,
     bloomStrength: 0.5,
-    bloomRadius: 0.65
+    bloomRadius: 0.7
 }
             
 				const renderScene = new RenderPass( scene, camera );
@@ -764,14 +764,7 @@ function loadmodel(modelname){
                     allobjs.push(child) 
              
                 }
-
-                if(child.isMesh && child.userData.Owner){
-
-                }
-    
-                  if(child.isMesh && child.material.map){
-                     child.material.map.anisotropy = 1;
-                  }
+               
     
               })
     
