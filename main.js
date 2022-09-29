@@ -315,7 +315,7 @@ let selectedObjects = [];
 
              // Scene
             const scene = new THREE.Scene();
-            scene.background = new THREE.Color('#4E005B')
+            scene.background = new THREE.Color('#4F57B8')
          
              // Camera
  			const camera = new THREE.PerspectiveCamera( 40,  sizes.width /  sizes.height, 0.001, 15000 );
@@ -563,50 +563,14 @@ window.addEventListener( 'pointermove', onPointerMove );
 
             // Scene background 
 
-            const backgroundgeometry = new THREE.SphereGeometry(800,60,60)
-            const backgroundmaterial = new THREE.ShaderMaterial( {
-
-                uniforms: {
             
-                    time: { value: 1.0 },
-                    resolution: { value: new THREE.Vector2() }
-            
-                },
-            
-                vertexShader: `
-                   varying vec2 uUV;
-
-                   void main(){
-                      gl_Position = projectionMatrix * modelViewMatrix * vec4(position,1.0);
-                       uUV = uv;
-                   } 
-                `,
-            
-                fragmentShader: `
-                varying vec2 uUV;
-
-                void main() {
-                
-                    vec3 colorA = vec3(0.2,0.2,0.0);
-                    vec3 colorB = vec3(0.4,0.4,1.0);
-                    vec3 color = mix(colorA, colorB, 1.0);
-
-                    gl_FragColor = vec4(color,1.0);
-                }
-                `,
-                side: THREE.DoubleSide,
-            } );
-
-             const backgroundobj = new THREE.Mesh(backgroundgeometry,backgroundmaterial);
-             scene.add(backgroundobj)
-
          
          
              // Effect composer
 let bloomeffect = {
-    bloomThreshold: 0.78,
-    bloomStrength: 0.78,
-    bloomRadius: 0.5
+    bloomThreshold: 0.7,
+    bloomStrength: 0.5,
+    bloomRadius: 0.65
 }
             
 				const renderScene = new RenderPass( scene, camera );

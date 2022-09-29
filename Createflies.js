@@ -3,9 +3,10 @@ import * as THREE from 'https://cdn.skypack.dev/three@0.136';
 export function flies(amount,scene){
     const SphereGeometry = new THREE.SphereGeometry(0.25,4,4);
     const spherematerial = new THREE.MeshStandardMaterial({
-       color: 'white'
+       color: 'white',
+
     })
-    
+
     for(let i = 0; i < amount;i++){
       
         const flies = new THREE.Mesh(SphereGeometry,spherematerial)
