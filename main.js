@@ -275,11 +275,6 @@ canvas.addEventListener('mousedown', () =>{
  
 })
 
-camera_resetbtn.addEventListener('click', () =>{
-     cameraControls.setPosition( -16, 120, 140,true)
-})
-
-// cameraControls.fitToSphere( sphereOrMesh, enableTransition )
 
 // Modal logic
 
@@ -412,7 +407,19 @@ canvas.addEventListener('mousedown', e => {
     }
 
     if(intersects[0].object){
+
          newmodal.classList.add('active-modal')
+
+         if(intersects[0].object.userData.Owner || intersects[0].object.userData.Image){
+             document.querySelector('.building-owner').innerText = 'Owner: ' + intersects[0].object.userData.Owner
+             document.querySelector('.map-image').src = intersects[0].object.userData.Image
+         }
+
+         else {
+            document.querySelector('.building-owner').innerText = 'Owner: Ken'
+            document.querySelector('.map-image').src = 'images/place-holder.png'
+
+         }
     }
 
     
@@ -789,6 +796,10 @@ function loadmodel(modelname){
                   
                     allobjs.push(child) 
              
+                }
+
+                if(child.isMesh && child.userData.Owner){
+
                 }
     
                   if(child.isMesh && child.material.map){
