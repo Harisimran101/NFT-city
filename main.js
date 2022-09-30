@@ -10,7 +10,7 @@ import { GUI } from 'https://cdn.skypack.dev/three@0.136/examples/jsm/libs/lil-g
 // import { DRACOLoader } from 'https://cdn.skypack.dev/three@0.136/examples/jsm/loaders/DRACOLoader.js';
 import { LoadingManager } from 'https://cdn.skypack.dev/three@0.136/src/loaders/LoadingManager.js';
 import { OutlinePass } from 'https://cdn.skypack.dev/three@0.136/examples/jsm/postprocessing/OutlinePass.js';
-import { flies } from './Createflies.js';
+// import { flies } from './Createflies.js';
 
 
 
@@ -331,7 +331,7 @@ let selectedObjects = [];
 			document.body.appendChild( renderer.domElement );
             renderer.setPixelRatio( window.devicePixelRatio / 1.2);
 
-flies(200,scene)
+// flies(200,scene)
 
 
 // Camera Controls
@@ -564,7 +564,7 @@ window.addEventListener( 'pointermove', onPointerMove );
             // Scene background 
 
 
-            const envgeometry = new THREE.BoxGeometry(600,350,600)
+            const envgeometry = new THREE.BoxGeometry(640,550,900)
             const envmaterial = new THREE.ShaderMaterial( {
                 side: THREE.DoubleSide,
                 uniforms: {
@@ -605,7 +605,7 @@ window.addEventListener( 'pointermove', onPointerMove );
             const envscene = new THREE.Mesh(envgeometry,envnewmmaterial)
          scene.add(envscene)
 
-         const groundgeometry = new THREE.PlaneGeometry(700,700)
+         const groundgeometry = new THREE.PlaneGeometry(950,950)
          const groundmaterial = new THREE.MeshBasicMaterial({
         map: new THREE.TextureLoader().load('https://t3.ftcdn.net/jpg/02/53/59/18/360_F_253591845_DjZi5bCf6jQv94Qlvf0MWZ3oGu3Ludzy.jpg')
           //color: 'red',
