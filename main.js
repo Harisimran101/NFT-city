@@ -563,13 +563,63 @@ window.addEventListener( 'pointermove', onPointerMove );
 
             // Scene background 
 
+
+            const envgeometry = new THREE.BoxGeometry(600,350,600)
+            const envmaterial = new THREE.ShaderMaterial( {
+                side: THREE.DoubleSide,
+                uniforms: {
+                    value: {value: 35.0},
+                    time: { value: 1.0 },
+                    resolution: { value: new THREE.Vector2() }
             
-         
-         
+                },
+            
+                vertexShader: `
+                  varying vec2 uUV;
+                
+                    void main(){
+                         gl_Position = projectionMatrix * modelViewMatrix * vec4(position,1.0);
+                         uUV = uv;
+                    }
+                `,
+            
+                fragmentShader: `
+                varying vec2 uUV;
+                uniform float value;
+                uniform float time;
+                   void main(){
+                     float newuv = uUV.x + time;
+
+                    float checkbox = floor(newuv *value) / value;
+                     checkbox *= floor(uUV.y * value) / value;
+                     gl_FragColor = vec4(0.3,0.0,checkbox,1.0);
+                   }
+                `
+            
+            } );
+            const envnewmmaterial = new THREE.MeshBasicMaterial({
+                 map: new THREE.TextureLoader().load('https://t3.ftcdn.net/jpg/02/53/59/18/360_F_253591845_DjZi5bCf6jQv94Qlvf0MWZ3oGu3Ludzy.jpg'),
+                 side: THREE.DoubleSide,
+            })
+            
+            const envscene = new THREE.Mesh(envgeometry,envnewmmaterial)
+         scene.add(envscene)
+
+         const groundgeometry = new THREE.PlaneGeometry(700,700)
+         const groundmaterial = new THREE.MeshBasicMaterial({
+        map: new THREE.TextureLoader().load('https://t3.ftcdn.net/jpg/02/53/59/18/360_F_253591845_DjZi5bCf6jQv94Qlvf0MWZ3oGu3Ludzy.jpg')
+          //color: 'red',
+    
+        })
+
+         const ground = new THREE.Mesh(groundgeometry,groundmaterial)
+         scene.add(ground)
+         ground.rotation.x =- Math.PI * 0.5
+         ground.position.y = -0.2         
              // Effect composer
 let bloomeffect = {
     bloomThreshold: 0.7,
-    bloomStrength: 0.5,
+    bloomStrength: 0.6,
     bloomRadius: 0.7
 }
             
@@ -679,7 +729,7 @@ window.addEventListener('resize', function()
         } );
 
 
-        const boundingspheregeometry = new THREE.BoxGeometry(640,550,900,70,70,70);
+        const boundingspheregeometry = new THREE.BoxGeometry(640,550,900,50,50,50);
         const boundingsphere = new THREE.Mesh(boundingspheregeometry,boundingshader)
         scene.add(boundingsphere) 
         boundingsphere.visible = true
@@ -706,7 +756,6 @@ manager.onLoad = function ( ) {
 
 new RGBELoader().load('Environment/Environment.hdr',function(texture){
     texture.mapping = THREE.EquirectangularReflectionMapping;
-    
        scene.environment = texture;
     })
 
@@ -826,6 +875,7 @@ let time = 0;
                 cameraControls.update(0.01)
                 updateCamera();
                time += 0.01
+               envmaterial.uniforms.time.value = time
 
               boundingshader.uniforms.alpha.value = fadevalue.value;
 
