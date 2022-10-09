@@ -19,3 +19,4 @@ export function flies(amount,scene){
     }
  
 }
+

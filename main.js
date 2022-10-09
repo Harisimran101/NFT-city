@@ -139,7 +139,8 @@ canvas.addEventListener('mousedown', () =>{
     console.log(camera.position)
      if(camera.position.x > 275 || camera.position.x < -290){
        // cameraControls.fitToSphere( boundingsphere, false )
-    
+      //  envnewmmaterial.map = colorfulbg
+
        anime({
         targets: '.outofrange-screen',
         opacity: 1,
@@ -187,7 +188,8 @@ canvas.addEventListener('mousedown', () =>{
      
 
     else if(camera.position.z >430 || camera.position.z < -350){
-       
+       // envnewmmaterial.map = colorfulbg
+
         anime({
             targets: '.outofrange-screen',
             opacity: 1,
@@ -236,6 +238,8 @@ canvas.addEventListener('mousedown', () =>{
     }
 
     else if(camera.position.z >340 || camera.position.z < -275){
+        envnewmmaterial.map = message
+
         anime({
             targets: fadevalue,
             value: [fadevalue.value,1],
@@ -255,6 +259,8 @@ canvas.addEventListener('mousedown', () =>{
     }
 
     else if(camera.position.x > 220 || camera.position.x < -220){
+        envnewmmaterial.map = message
+
         anime({
             targets: fadevalue,
             value: [fadevalue.value,1],
@@ -331,6 +337,13 @@ let selectedObjects = [];
 			document.body.appendChild( renderer.domElement );
             renderer.setPixelRatio( window.devicePixelRatio / 1.2);
 
+
+            const textureloader = new THREE.TextureLoader()
+            let message = textureloader.load('images/returnzone.jpg')
+            let colorfulbg = textureloader.load('images/colorful-bg.jpg')
+
+            message.wrapS = message.wrapT = THREE.RepeatWrapping;
+             message.repeat.set( 10, 10 );
 // flies(200,scene)
 
 
@@ -564,41 +577,13 @@ window.addEventListener( 'pointermove', onPointerMove );
             // Scene background 
 
 
-            const envgeometry = new THREE.BoxGeometry(640,550,900)
-            const envmaterial = new THREE.ShaderMaterial( {
-                side: THREE.DoubleSide,
-                uniforms: {
-                    value: {value: 35.0},
-                    time: { value: 1.0 },
-                    resolution: { value: new THREE.Vector2() }
-            
-                },
-            
-                vertexShader: `
-                  varying vec2 uUV;
-                
-                    void main(){
-                         gl_Position = projectionMatrix * modelViewMatrix * vec4(position,1.0);
-                         uUV = uv;
-                    }
-                `,
-            
-                fragmentShader: `
-                varying vec2 uUV;
-                uniform float value;
-                uniform float time;
-                   void main(){
-                     float newuv = uUV.x + time;
+            const envgeometry = new THREE.BoxGeometry(900,550,900)
 
-                    float checkbox = floor(newuv *value) / value;
-                     checkbox *= floor(uUV.y * value) / value;
-                     gl_FragColor = vec4(0.3,0.0,checkbox,1.0);
-                   }
-                `
             
-            } );
+           
+           
             const envnewmmaterial = new THREE.MeshBasicMaterial({
-                 map: new THREE.TextureLoader().load('https://t3.ftcdn.net/jpg/02/53/59/18/360_F_253591845_DjZi5bCf6jQv94Qlvf0MWZ3oGu3Ludzy.jpg'),
+                 map: colorfulbg,
                  side: THREE.DoubleSide,
             })
             
@@ -607,7 +592,7 @@ window.addEventListener( 'pointermove', onPointerMove );
 
          const groundgeometry = new THREE.PlaneGeometry(950,950)
          const groundmaterial = new THREE.MeshBasicMaterial({
-        map: new THREE.TextureLoader().load('https://t3.ftcdn.net/jpg/02/53/59/18/360_F_253591845_DjZi5bCf6jQv94Qlvf0MWZ3oGu3Ludzy.jpg')
+        map: colorfulbg,
           //color: 'red',
     
         })
@@ -725,11 +710,12 @@ window.addEventListener('resize', function()
             `,
             
             wireframe: true,
+            wireframeLinewidth: 2.0,
             transparent: true
         } );
 
 
-        const boundingspheregeometry = new THREE.BoxGeometry(640,550,900,50,50,50);
+        const boundingspheregeometry = new THREE.BoxGeometry(640,550,800,50,50,50);
         const boundingsphere = new THREE.Mesh(boundingspheregeometry,boundingshader)
         scene.add(boundingsphere) 
         boundingsphere.visible = true
@@ -875,7 +861,6 @@ let time = 0;
                 cameraControls.update(0.01)
                 updateCamera();
                time += 0.01
-               envmaterial.uniforms.time.value = time
 
               boundingshader.uniforms.alpha.value = fadevalue.value;
 
