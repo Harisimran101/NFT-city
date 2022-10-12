@@ -139,7 +139,7 @@ canvas.addEventListener('mousedown', () =>{
     console.log(camera.position)
      if(camera.position.x > 275 || camera.position.x < -290){
        // cameraControls.fitToSphere( boundingsphere, false )
-      //  envnewmmaterial.map = colorfulbg
+        envnewmmaterial.map = colorfulbg
 
        anime({
         targets: '.outofrange-screen',
@@ -188,7 +188,7 @@ canvas.addEventListener('mousedown', () =>{
      
 
     else if(camera.position.z >430 || camera.position.z < -350){
-       // envnewmmaterial.map = colorfulbg
+       envnewmmaterial.map = colorfulbg
 
         anime({
             targets: '.outofrange-screen',
@@ -577,7 +577,7 @@ window.addEventListener( 'pointermove', onPointerMove );
             // Scene background 
 
 
-            const envgeometry = new THREE.BoxGeometry(900,550,900)
+            const envgeometry = new THREE.BoxGeometry(1600,800,1600)
 
             
            
@@ -590,7 +590,7 @@ window.addEventListener( 'pointermove', onPointerMove );
             const envscene = new THREE.Mesh(envgeometry,envnewmmaterial)
          scene.add(envscene)
 
-         const groundgeometry = new THREE.PlaneGeometry(950,950)
+         const groundgeometry = new THREE.PlaneGeometry(1700,1700)
          const groundmaterial = new THREE.MeshBasicMaterial({
         map: colorfulbg,
           //color: 'red',
@@ -715,7 +715,7 @@ window.addEventListener('resize', function()
         } );
 
 
-        const boundingspheregeometry = new THREE.BoxGeometry(640,550,800,50,50,50);
+        const boundingspheregeometry = new THREE.BoxGeometry(200,300,200,50,50,50);
         const boundingsphere = new THREE.Mesh(boundingspheregeometry,boundingshader)
         scene.add(boundingsphere) 
         boundingsphere.visible = true
