@@ -322,7 +322,8 @@ let selectedObjects = [];
              // Scene
             const scene = new THREE.Scene();
             scene.background = new THREE.Color('#4F57B8')
-         
+            scene.fog = new THREE.Fog( new THREE.Color('#E74EFF'), 0.015, 1000 ); 
+
              // Camera
  			const camera = new THREE.PerspectiveCamera( 40,  sizes.width /  sizes.height, 0.001, 15000 );
             camera.position.set(0,150,240)
