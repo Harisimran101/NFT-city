@@ -131,6 +131,20 @@ document.querySelector('.play-trailer-btn').addEventListener('click', () =>{
 
 })
 
+
+// Random names data 
+
+const usernames = [
+    'Alex','Eric','David','Sophia','John','Alexa','James','Robert',
+    'William','Joseph','Daniel','Matthew','Paul','Jason','Gary',
+    'Larry','Scott','Brandon','Alexander','Dennis','Jack','Adam','Kyle',
+    'Keith','Arthur','Bryan','Bruce','Albert','Wayne','Ralph','Philip'
+]
+
+function randomnum(min,max){
+     return Math.floor(Math.random() * (max - min +1)) + min
+}
+
 // Camera reset logic
 
 const camera_resetbtn = document.querySelector('.reset-camera-btn')
@@ -322,7 +336,8 @@ let selectedObjects = [];
              // Scene
             const scene = new THREE.Scene();
             scene.background = new THREE.Color('#4F57B8')
-            scene.fog = new THREE.Fog( new THREE.Color('#E74EFF'), 0.015, 1000 ); 
+            scene.fog = new THREE.Fog( new THREE.Color('#E74EFF'), 0.015, 650 ); 
+            scene.fog = new THREE.FogExp2( new THREE.Color('#E74EFF'),0.0022 )
 
              // Camera
  			const camera = new THREE.PerspectiveCamera( 40,  sizes.width /  sizes.height, 0.001, 15000 );
@@ -578,7 +593,7 @@ window.addEventListener( 'pointermove', onPointerMove );
             // Scene background 
 
 
-            const envgeometry = new THREE.BoxGeometry(1600,800,1600)
+            const envgeometry = new THREE.BoxGeometry(1000,600,1000)
 
             
            
@@ -793,6 +808,10 @@ function loadmodel(modelname){
               gltf.scene.traverse((child) =>{
 
                 //  allobjs.push(child)
+
+                if(child.isMesh && !child.userData.Owner){
+                   child.userData.Owner = usernames[randomnum(0,usernames.length - 1)]
+                }
             
     
                 if(child.isMesh && child.userData.clicked){
