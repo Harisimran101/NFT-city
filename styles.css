@@ -346,15 +346,15 @@ padding: 90px 18px;
     min-width: 360px;
     position: absolute;
     left: 50%;
-    top: 50%;
-    transform: translate(-50%,110%);
+    top: -150%;
+    transform: translate(-50%,-50%);
     z-index: 10000;
     border-radius: 12px;
 transition: 0.7s ease;
 }
 
 .active-modal {
-   transform: translate(-50%,-50%);
+   top: 50%
 }
 
 .map-image {

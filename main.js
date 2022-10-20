@@ -312,6 +312,12 @@ document.querySelector('.profile-link').addEventListener('click', () =>{
     newmodal.classList.add('active-modal')
 
 })
+
+document.querySelector('#referal-btn').addEventListener('click', () =>{
+   newmodal.classList.remove('active-modal')     
+})
+
+
 //  Enter City
 
 document.querySelector('.Enter-btn').addEventListener('click', () =>{
@@ -644,9 +650,9 @@ let bloomeffect = {
 				composer.addPass( outlinePass );
 
 			const params = {
-				edgeStrength: 5.0,
+				edgeStrength: 18.0,
 				edgeGlow: 1.0,
-				edgeThickness: 4.0,
+				edgeThickness: 50.0,
 				pulsePeriod: 0,
 				rotate: false,
 				usePatternTexture: false
@@ -654,15 +660,17 @@ let bloomeffect = {
 
             function Configuration() {
 
-				this.visibleEdgeColor = '#FF0A0A';
-				this.hiddenEdgeColor = '#FF0A0A';
+				this.visibleEdgeColor = '#FFFFFF';
+				this.hiddenEdgeColor = '#FFFFFF';
 
 			}
 
 			const conf = new Configuration();
             
-            outlinePass.visibleEdgeColor.set('#EE0000')
-            
+            outlinePass.visibleEdgeColor.set('#FFFFFF')
+            outlinePass.edgeStrength = 60
+            outlinePass.edgeThickness = 3.2
+
             // Lights
     
 
