@@ -149,7 +149,11 @@ function randomnum(min,max){
 
 const camera_resetbtn = document.querySelector('.reset-camera-btn')
 
+let mousedown = false
+
 canvas.addEventListener('mousedown', () =>{
+   mousedown = true
+
     console.log(camera.position)
      if(camera.position.x > 275 || camera.position.x < -290){
        // cameraControls.fitToSphere( boundingsphere, false )
@@ -433,36 +437,80 @@ canvas.addEventListener('mousedown', e => {
 
     
 	//calculate objects intersecting the picking ray
-	const intersects = raycaster.intersectObjects( allobjs);
+	// const intersects = raycaster.intersectObjects( allobjs);
 
-    for ( let i = 0; i < intersects.length; i ++ ) {
+ 
+
+
+    //     for ( let i = 0; i < intersects.length; i ++ ) {
         
 
-            cameraState.cameraMethod = 8;
-            cameraState.isTargetMoving = true;
-            cameraState.targetPos = intersects[0].point.clone().setY(0);
+    //         cameraState.cameraMethod = 8;
+    //         cameraState.isTargetMoving = true;
+    //         cameraState.targetPos = intersects[0].point.clone().setY(0);
         
-    }
+    
+    // }
 
-    if(intersects[0].object){
+  
 
-         newmodal.classList.add('active-modal')
+    // if(intersects[0].object){
 
-         if(intersects[0].object.userData.Owner || intersects[0].object.userData.Image){
-             document.querySelector('.building-owner').innerText = 'Owner: ' + intersects[0].object.userData.Owner
-             document.querySelector('.map-image').src = intersects[0].object.userData.Image
-         }
+    //      newmodal.classList.add('active-modal')
 
-         else {
-            document.querySelector('.building-owner').innerText = 'Owner: Ken'
-            document.querySelector('.map-image').src = 'images/place-holder.png'
+    //      if(intersects[0].object.userData.Owner || intersects[0].object.userData.Image){
+    //          document.querySelector('.building-owner').innerText = 'Owner: ' + intersects[0].object.userData.Owner
+    //          document.querySelector('.map-image').src = intersects[0].object.userData.Image
+    //      }
 
-         }
-    }
+    //      else {
+    //         document.querySelector('.building-owner').innerText = 'Owner: Ken'
+    //         document.querySelector('.map-image').src = 'images/place-holder.png'
+
+    //      }
+    // }
 
     
 })
+
+canvas.addEventListener('dblclick', e =>{
+    const intersects = raycaster.intersectObjects( allobjs);
+
+       
+
+
+    for ( let i = 0; i < intersects.length; i ++ ) {
+    
+
+        cameraState.cameraMethod = 8;
+        cameraState.isTargetMoving = true;
+        cameraState.targetPos = intersects[0].point.clone().setY(0);   
+
+}
+
+let oldscale = intersects[0].object.scale
+
+console.log(intersects[0].object.scale)
+
+gsap.to(intersects[0].object.scale,{
+
+    keyframes: [
+        {x: oldscale.x,y: oldscale.y,z: oldscale.z},
+        {x: oldscale.x + 0.15,y: oldscale.y + 0.15,z: oldscale.z + 0.15},
+        {x: oldscale.x,y: oldscale.y,z: oldscale.z},
+    ]
+  
+   
+})
+
+
+})
+
+let mousemoving = false;
+
 const mouseMoveHandler = e => {
+    mousemoving = true
+
     if (!cameraState.isClicked) {
         e.preventDefault();
         return;
