@@ -496,9 +496,11 @@ gsap.to(intersects[0].object.scale,{
 
     keyframes: [
         {x: oldscale.x,y: oldscale.y,z: oldscale.z},
-        {x: oldscale.x + 0.15,y: oldscale.y + 0.15,z: oldscale.z + 0.15},
+        {x: oldscale.x * 1.18,y: oldscale.y * 1.18,z: oldscale.z * 1.18},
         {x: oldscale.x,y: oldscale.y,z: oldscale.z},
-    ]
+    ],
+
+    delay: 0.5,
   
    
 })
