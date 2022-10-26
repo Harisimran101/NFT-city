@@ -454,21 +454,7 @@ canvas.addEventListener('mousedown', e => {
 
   
 
-    // if(intersects[0].object){
-
-    //      newmodal.classList.add('active-modal')
-
-    //      if(intersects[0].object.userData.Owner || intersects[0].object.userData.Image){
-    //          document.querySelector('.building-owner').innerText = 'Owner: ' + intersects[0].object.userData.Owner
-    //          document.querySelector('.map-image').src = intersects[0].object.userData.Image
-    //      }
-
-    //      else {
-    //         document.querySelector('.building-owner').innerText = 'Owner: Ken'
-    //         document.querySelector('.map-image').src = 'images/place-holder.png'
-
-    //      }
-    // }
+   
 
     
 })
@@ -485,7 +471,25 @@ canvas.addEventListener('dblclick', e =>{
         cameraState.cameraMethod = 8;
         cameraState.isTargetMoving = true;
         cameraState.targetPos = intersects[0].point.clone().setY(0);   
+       
 
+
+}
+
+if(intersects[0].object){
+
+    newmodal.classList.add('active-modal')
+
+    if(intersects[0].object.userData.Owner || intersects[0].object.userData.Image){
+        document.querySelector('.building-owner').innerText = 'Owner: ' + intersects[0].object.userData.Owner
+        document.querySelector('.map-image').src = intersects[0].object.userData.Image
+    }
+
+    else {
+       document.querySelector('.building-owner').innerText = 'Owner: Ken'
+       document.querySelector('.map-image').src = 'images/place-holder.png'
+
+    }
 }
 
 let oldscale = intersects[0].object.scale
@@ -496,11 +500,11 @@ gsap.to(intersects[0].object.scale,{
 
     keyframes: [
         {x: oldscale.x,y: oldscale.y,z: oldscale.z},
-        {x: oldscale.x * 1.18,y: oldscale.y * 1.18,z: oldscale.z * 1.18},
+        {x: oldscale.x * 1.32,y: oldscale.y * 1.32,z: oldscale.z * 1.32},
         {x: oldscale.x,y: oldscale.y,z: oldscale.z},
     ],
 
-    delay: 0.5,
+    delay: 0.7,
   
    
 })
